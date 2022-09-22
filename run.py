@@ -7,12 +7,15 @@ def accept_game():
     print("Would you like to start the game?")
     user_accept = int(input("Press 1 for yes\n"))
     print("")
+
+    initial_validation(user_accept)
     
     # Pressing 1 would allow the instruction question to show.
     if user_accept == 1:
         print("Would you like to read the instructions?")
-        instructions = int(input("Press 1 for yes, 0 for no\n"))
+        instructions = input("Press 1 for yes, 0 for no\n")
         print("")
+        initial_validation(instructions)
         if instructions == 1:
             show_instructions()
         # Pressing 0 would allow the user to skip the instructions and go straight to the page where the difficulty level is picked.
@@ -39,15 +42,28 @@ def show_instructions():
     print("The game ends when all the ships have been sank or when your bullet runs out.")
     print("Think carefully and enjoy the game!\n")
 
-    instructions_read = int(input("Press 0 when you have finished reading the instructions.\n"))
+    instructions_read = input("Press 1 when you have finished reading the instructions.\n")
     print("")
+    initial_validation(instructions_read)
 
-    if instructions_read == 0:
+    if instructions_read == 1:
         difficulty_level()
+
 
 def difficulty_level():
     print("Which type of challenge are you up for?")
-    user_level_choice = int(input("Press 1 for easy and 2 for hard\n"))
+    user_level_choice = input("Press 1 for easy and 2 for hard\n")
+
+
+def initial_validation(value):
+
+    try:
+        if value != 0:
+            raise ValueError(
+                f"The number you entered is {value}. Please answer with 1 or 0."
+            )
+    except ValueError as e:
+        print(f"You have not entered {e}. Please try again.")
 
 
 print("Welcome to Battleship Attack!\n")
