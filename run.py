@@ -1,3 +1,4 @@
+from random import randint
 def accept_game():
     '''
     Function for the user to accept the challenge. 
@@ -85,7 +86,45 @@ def difficulty_level():
         if initial_validation(user_level_choice, answer):
             break
 
-        user_level_choice = int(user_level_choice)
+    user_level_choice = int(user_level_choice)
+    '''
+    The user would have a choice between the easy and hard game.
+    The hard game is a 10 x 10 grid.
+    The easy game is a 6 x 6 grid.
+    '''
+    if user_level_choice == 1:
+        easy()
+    
+    elif user_level_choice == 2:
+        hard()
+
+grid = []
+cpu_grid = []
+
+def easy():
+    '''
+    Function that generates the easy grid or the 6 x 6 grid.
+    This block of code was taken from iKelvvv and modified.
+    Reference is given in the readme.
+    The original would be pasted there.
+    '''
+    for x in range(6):
+        #Generates the size of the playing board.
+        grid.append(["-"] * 6)
+        cpu_grid.append(['_'] * 6)
+
+    def board_format(board):
+        for row in board:
+            print(" ".join(row))
+
+    def print_boards():
+        print("Player's Board:")
+        board_format(grid)
+        print("")
+        print("Computer's Board:")
+        board_format(cpu_grid)
+    
+    print_boards()
 
 
 # This block of code is taken from Love Sandwiches and modified accordingly.
@@ -117,10 +156,6 @@ def initial_validation(value,number_of_answers):
     return True
 
 
-grid = []
-cpu_grid = []
-
 print("Welcome to Battleship Attack!\n")
 
 accept_game()
-print_boards()
