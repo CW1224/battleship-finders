@@ -46,7 +46,7 @@ def show_instructions():
     Choosing no would bring the user to the next part of the game.
     '''
     print("The goal of this game is to sink all of the opponant's ships.")
-    print("You will have a choice between grid sizes of 6x6 or 10x10.")
+    print("You will have a choice between grid sizes of 6x6 or 8x8.")
     print("Both players will have a total of four ships.")
     print("You will have a total of 24 bullets.")
     print("Choose where you want to aim by typing in the co-ordinates.")
@@ -113,18 +113,29 @@ def easy():
         grid.append(["-"] * 6)
         cpu_grid.append(['_'] * 6)
 
-    def board_format(board):
+    print_boards()
+
+
+def hard():
+    # Function that generates the easy grid or the 8 x 8 grid.
+
+    for x in range(8):
+        #Generates the size of the playing board.
+        grid.append(["-"] * 8)
+        cpu_grid.append(['_'] * 8)
+
+    print_boards()
+
+def board_format(board):
         for row in board:
             print(" ".join(row))
 
-    def print_boards():
-        print("Player's Board:")
-        board_format(grid)
-        print("")
-        print("Computer's Board:")
-        board_format(cpu_grid)
-    
-    print_boards()
+def print_boards():
+    print("Player's Board:")
+    board_format(grid)
+    print("")
+    print("Computer's Board:")
+    board_format(cpu_grid)
 
 
 # This block of code is taken from Love Sandwiches and modified accordingly.
