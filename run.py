@@ -1,4 +1,6 @@
 from random import randint
+
+
 def accept_game():
     '''
     Function for the user to accept the challenge. 
@@ -87,11 +89,8 @@ def difficulty_level():
             break
 
     user_level_choice = int(user_level_choice)
-    '''
-    The user would have a choice between the easy and hard game.
-    The hard game is a 10 x 10 grid.
-    The easy game is a 6 x 6 grid.
-    '''
+
+    # The user would have a choice between the easy and hard game.
     if user_level_choice == 1:
         easy()
     
@@ -113,12 +112,61 @@ def easy():
         grid.append(["-"] * 6)
         cpu_grid.append(['_'] * 6)
 
+    ship_col = player_ship_col(grid)
+    ship_row = player_ship_row(grid)
+    cpu_col = cpu_ship_col(cpu_grid)
+    cpu_row = cpu_ship_row(cpu_grid)
+
+    grid[ship_col][ship_row] = "S"
+    grid[ship_col2][ship_row2] = "S"
+    grid[ship_col3][ship_row3] = "S"
+
     print_boards()
+
+    def player_ship_col(grid):
+    #Generates a random column's number of the player's ship.
+        return randint(0, len(grid) - 1)
+
+
+    def player_ship_row(grid):
+        #Generates a random row's number of the player's ship.
+        return randint(0, len(grid) - 1)
+
+
+    def cpu_ship_col(cpu_grid):
+        #Generates a random column's number of the computer's ship.
+        return randint(0, len(cpu_grid) - 1)
+
+
+    def cpu_ship_row(cpu_grid):
+        #Generates a random row's number of the computer's ship.
+        return randint(0, len(cpu_grid) - 1)
+
+
+    '''
+    Loop that doesn't allow the player's or cpu's ship 
+    to be generated in the same location.
+    '''
+    while True:
+        ship_col2 = player_ship_col(grid)
+        ship_row2 = player_ship_row(grid)
+        cpu_col2 = cpu_ship_col(cpu_grid)
+        cpu_row2 = cpu_ship_row(cpu_grid)
+        if (ship_col2 != ship_col and ship_row2 != ship_row) and \
+        (cpu_col2 != cpu_col and cpu_row2 != cpu_row):
+            ship_col3 = player_ship_col(grid)
+            ship_row3 = player_ship_row(grid)
+            cpu_col3 = cpu_ship_col(cpu_grid)
+            cpu_row3 = cpu_ship_row(cpu_grid)
+            if (ship_col3 != ship_col2 and ship_row3 != ship_row2) and \
+            (ship_col3 != ship_col and ship_row3 != ship_row) and \
+            (cpu_col3 != cpu_col2 and cpu_row3 != cpu_row2) and \
+            (cpu_col3 != cpu_col and cpu_row3 != cpu_row):
+                break
 
 
 def hard():
     # Function that generates the easy grid or the 8 x 8 grid.
-
     for x in range(8):
         #Generates the size of the playing board.
         grid.append(["-"] * 8)
@@ -126,9 +174,10 @@ def hard():
 
     print_boards()
 
+
 def board_format(board):
-        for row in board:
-            print(" ".join(row))
+    for row in board:
+        print(" ".join(row))
 
 def print_boards():
     print("Player's Board:")
@@ -139,7 +188,6 @@ def print_boards():
 
 
 # This block of code is taken from Love Sandwiches and modified accordingly.
-
 def initial_validation(value,number_of_answers):
     '''
     The function that would determine if the data entered is valid or not.
