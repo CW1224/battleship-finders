@@ -17,7 +17,7 @@ def accept_game():
     
     user_accept = int(user_accept)
 
-        # Pressing 1 would allow the instruction question to show.
+    # Pressing 1 would allow the instruction question to show.
     if user_accept == 1:
         while True:
             print("Would you like to read the instructions?")
@@ -73,6 +73,10 @@ def show_instructions():
 
 
 def difficulty_level():
+    '''
+    Function that allows the user to choose between easy and hard.
+    There are two choices altogether.
+    '''
     while True:
         print("Which type of challenge are you up for?")
         user_level_choice = input("Press 1 for easy and 2 for hard\n")
@@ -82,23 +86,9 @@ def difficulty_level():
             break
 
         user_level_choice = int(user_level_choice)
-# This block of code is taken from Love Sandwiches and modified accordingly. The code below is the original.
-'''
-def validate_data(values):
 
-    try: 
-        [int(value) for value in values]
-        if len(values) != 6:
-            raise ValueError(
-                f"Exactly 6 values required, you provided {len(values)}"
-            )
-        
-    except ValueError as e:
-        print(f"Invalid Data: {e}, please try again\n")
-        return False
 
-    return True
-'''
+# This block of code is taken from Love Sandwiches and modified accordingly.
 
 def initial_validation(value,number_of_answers):
     '''
@@ -127,6 +117,10 @@ def initial_validation(value,number_of_answers):
     return True
 
 
+grid = []
+cpu_grid = []
+
 print("Welcome to Battleship Attack!\n")
 
 accept_game()
+print_boards()
