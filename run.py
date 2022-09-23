@@ -7,9 +7,12 @@ def accept_game():
     while True:
         print("Would you like to start the game?")
         user_accept = input("Press 1 for yes\n")
+        answer = 'one'
+        
         print("")
 
-        if initial_validation(user_accept):
+        # Determining if the answer the user imputs is valid or not.
+        if initial_validation(user_accept,answer):
             break
     
     user_accept = int(user_accept)
@@ -19,8 +22,11 @@ def accept_game():
         while True:
             print("Would you like to read the instructions?")
             instructions = input("Press 1 for yes, 0 for no\n")
+            answer = 'one_zero'
             print("")
-            if initial_validation(instructions):
+
+            # Determining if the answer the user imputs is valid or not.
+            if initial_validation(instructions,answer):
                 break
 
         instructions = int(instructions)
@@ -52,11 +58,12 @@ def show_instructions():
     print("Think carefully and enjoy the game!\n")
 
     while True: 
-
+        # Determining if the answer the user imputs is valid or not.
         instructions_read = input("Press 1 when you have finished reading the instructions.\n")
+        answer = 'one'
         print("")
 
-        if initial_validation(instructions_read):
+        if initial_validation(instructions_read,answer):
             break
     
     instructions_read = int(instructions_read)
@@ -86,17 +93,25 @@ def validate_data(values):
 
     return True
 '''
-def initial_validation(value):
 
+def initial_validation(value,number_of_answers):
+    '''
+    The function that would determine if the data entered is valid or not.
+    Depending on the number of answers, one of the function below would apply.
+    '''
     try:
         value = int(value)
-        if value != 0 and value!= 1:
+        if number_of_answers == 'two' and value != 0 and value!= 1:
+            raise ValueError(
+                f"The number you entered is {value}."
+            )
+        elif number_of_answers == 'one' and value!= 1:
             raise ValueError(
                 f"The number you entered is {value}."
             )
 
     except ValueError as e:
-        print(f"Invalid data: {e} Please answer accordingly.\n")
+        print(f"Invalid data: {e} Please try again.\n")
         return False
 
     return True
