@@ -6,26 +6,30 @@ def accept_game():
     '''
     while True:
         print("Would you like to start the game?")
-        user_accept = int(input("Press 1 for yes\n"))
+        user_accept = input("Press 1 for yes\n")
         print("")
 
         if initial_validation(user_accept):
             break
+    
+    user_accept = int(user_accept)
 
         # Pressing 1 would allow the instruction question to show.
     if user_accept == 1:
         while True:
             print("Would you like to read the instructions?")
-            instructions = int(input("Press 1 for yes, 0 for no\n"))
+            instructions = input("Press 1 for yes, 0 for no\n")
             print("")
             if initial_validation(instructions):
                 break
-                
-            if instructions == 1:
-                show_instructions()
+
+        instructions = int(instructions)
+        
+        if instructions == 1:
+            show_instructions()
     # Pressing 0 would allow the user to skip the instructions and go straight to the page where the difficulty level is picked.
-            elif instructions == 0:
-                difficulty_level()
+        elif instructions == 0:
+            difficulty_level()
 
 
 def show_instructions():
@@ -47,9 +51,15 @@ def show_instructions():
     print("The game ends when all the ships have been sank or when your bullet runs out.")
     print("Think carefully and enjoy the game!\n")
 
-    instructions_read = int(input("Press 1 when you have finished reading the instructions.\n"))
-    print("")
-    initial_validation(instructions_read)
+    while True: 
+
+        instructions_read = input("Press 1 when you have finished reading the instructions.\n")
+        print("")
+
+        if initial_validation(instructions_read):
+            break
+    
+    instructions_read = int(instructions_read)
 
     if instructions_read == 1:
         difficulty_level()
@@ -59,15 +69,32 @@ def difficulty_level():
     print("Which type of challenge are you up for?")
     user_level_choice = int(input("Press 1 for easy and 2 for hard\n"))
 
+# This block of code is taken from Love Sandwiches and modified accordingly. The code below is the original.
+'''
+def validate_data(values):
 
+    try: 
+        [int(value) for value in values]
+        if len(values) != 6:
+            raise ValueError(
+                f"Exactly 6 values required, you provided {len(values)}"
+            )
+        
+    except ValueError as e:
+        print(f"Invalid Data: {e}, please try again\n")
+        return False
+
+    return True
+'''
 def initial_validation(value):
 
     try:
-        number = int(value)
-        if number != 0 and number != 1:
+        value = int(value)
+        if value != 0 and value!= 1:
             raise ValueError(
-                f"The number you entered is {number}."
+                f"The number you entered is {value}."
             )
+
     except ValueError as e:
         print(f"Invalid data: {e} Please answer accordingly.\n")
         return False
