@@ -73,9 +73,15 @@ def show_instructions():
 
 
 def difficulty_level():
-    print("Which type of challenge are you up for?")
-    user_level_choice = int(input("Press 1 for easy and 2 for hard\n"))
+    while True:
+        print("Which type of challenge are you up for?")
+        user_level_choice = input("Press 1 for easy and 2 for hard\n")
+        answer = "three"
 
+        if initial_validation(user_level_choice, answer):
+            break
+
+        user_level_choice = int(user_level_choice)
 # This block of code is taken from Love Sandwiches and modified accordingly. The code below is the original.
 '''
 def validate_data(values):
@@ -106,6 +112,10 @@ def initial_validation(value,number_of_answers):
                 f"The number you entered is {value}."
             )
         elif number_of_answers == 'one' and value!= 1:
+            raise ValueError(
+                f"The number you entered is {value}."
+            )
+        elif number_of_answers == 'three' and value!= 1 and value!=2:
             raise ValueError(
                 f"The number you entered is {value}."
             )
