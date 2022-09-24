@@ -157,29 +157,59 @@ def easy():
             (cpu_col3 != cpu_col and cpu_row3 != cpu_row):
                 break
 
-    grid[ship_col][ship_row] = "S"
-    grid[ship_col2][ship_row2] = "S"
-    grid[ship_col3][ship_row3] = "S"
+    grid[ship_row][ship_col] = "S"
+    grid[ship_row2][ship_col2] = "S"
+    grid[ship_row3][ship_col3] = "S"
 
     print_boards()
 
-    start_game()
+    def start_game(number):
+            '''
+            Function that allows the game to run.
+            The player will start with 25 bullets.
+            Their aim is to sink all three of the opponent's ships.
+            '''
+            bullets = number
+            ships_remaining = 3
 
+            while bullets != 0 and ships_remaining != 0:
+                '''
+                Loop that will continue until the bullet runs out
+                or until all ships are sank.
+                '''
+                while True:
+                    
+                    print("Where do you want to aim?")
 
-def start_game():
-        '''
-        Function that allows the game to run.
-        '''
-        while True:
+                    player_input_row = input("Enter the horizontal co-ordinate here\n")
+                    player_input_col = input("Enter the vertical co-ordinate here\n")
+
+                    print(f"The co-ordinate you entered is {player_input_row},{player_input_col}.")
+
+                    if coordinate_validation(player_input_row,7) and coordinate_validation(player_input_col,7):
+                        print("Data is valid")
+                        break
+                
+                player_input_row = int(player_input_row) - 1
+                player_input_col = int(player_input_col) - 1 
+
+                print(player_input_row)
+                print(player_input_col)
+                print(f"{ship_row},{ship_col}")
+                print(f"{ship_row2},{ship_col2}")
+                print(f"{ship_row3},{ship_col3}")
+
+                if (player_input_row == ship_row and player_input_col == ship_col) \
+                    or (player_input_row == ship_row2 and player_input_col == ship_col2) \
+                    or (player_input_row == ship_row3 and player_input_col == ship_col3):
+                    print("Hit")
+
+                if ships_remaining == 0 or bullets == 0:
+                    break
+    
+    start_game(25)
+
             
-            print("Where to you want to aim?")
-            player_input_row = input("Enter the horizontal co-ordinate here\n")
-            player_input_col = input("Enter the vertical co-ordinate here\n")
-
-            print(f"The co-ordinate you entered is {player_input_row},{player_input_col}.")
-
-            if coordinate_validation(player_input_row,len(grid)) and coordinate_validation(player_input_col,len(grid)):
-                break
 
 
 def hard():
@@ -239,8 +269,7 @@ def coordinate_validation(value,grid_length):
     '''
     try:
         value = int(value)
-        grid_length = int(grid_length)
-        if value not in range(7):
+        if value not in range(grid_length):
             raise ValueError(
                 f"The number you entered is {value}."
             )
