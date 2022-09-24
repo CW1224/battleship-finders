@@ -111,20 +111,9 @@ def easy():
         #Generates the size of the playing board.
         grid.append(["-"] * 6)
         cpu_grid.append(['_'] * 6)
-
-    ship_col = player_ship_col(grid)
-    ship_row = player_ship_row(grid)
-    cpu_col = cpu_ship_col(cpu_grid)
-    cpu_row = cpu_ship_row(cpu_grid)
-
-    grid[ship_col][ship_row] = "S"
-    grid[ship_col2][ship_row2] = "S"
-    grid[ship_col3][ship_row3] = "S"
-
-    print_boards()
-
+    
     def player_ship_col(grid):
-    #Generates a random column's number of the player's ship.
+        #Generates a random column's number of the player's ship.
         return randint(0, len(grid) - 1)
 
 
@@ -142,12 +131,16 @@ def easy():
         #Generates a random row's number of the computer's ship.
         return randint(0, len(cpu_grid) - 1)
 
-
-    '''
-    Loop that doesn't allow the player's or cpu's ship 
-    to be generated in the same location.
-    '''
+    ship_col = player_ship_col(grid)
+    ship_row = player_ship_row(grid)
+    cpu_col = cpu_ship_col(cpu_grid)
+    cpu_row = cpu_ship_row(cpu_grid)
+    
     while True:
+        '''
+        Loop that doesn't allow the player's or cpu's ship 
+        to be generated in the same location.
+        '''
         ship_col2 = player_ship_col(grid)
         ship_row2 = player_ship_row(grid)
         cpu_col2 = cpu_ship_col(cpu_grid)
@@ -163,6 +156,12 @@ def easy():
             (cpu_col3 != cpu_col2 and cpu_row3 != cpu_row2) and \
             (cpu_col3 != cpu_col and cpu_row3 != cpu_row):
                 break
+
+    grid[ship_col][ship_row] = "S"
+    grid[ship_col2][ship_row2] = "S"
+    grid[ship_col3][ship_row3] = "S"
+
+    print_boards()
 
 
 def hard():
