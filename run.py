@@ -163,6 +163,24 @@ def easy():
 
     print_boards()
 
+    start_game()
+
+
+def start_game():
+        '''
+        Function that allows the game to run.
+        '''
+        while True:
+            
+            print("Where to you want to aim?")
+            player_input_row = input("Enter the horizontal co-ordinate here\n")
+            player_input_col = input("Enter the vertical co-ordinate here\n")
+
+            print(f"The co-ordinate you entered is {player_input_row},{player_input_col}.")
+
+            if coordinate_validation(player_input_row,len(grid)) and coordinate_validation(player_input_col,len(grid)):
+                break
+
 
 def hard():
     # Function that generates the easy grid or the 8 x 8 grid.
@@ -202,7 +220,27 @@ def initial_validation(value,number_of_answers):
             raise ValueError(
                 f"The number you entered is {value}."
             )
-        elif number_of_answers == 'three' and value!= 1 and value!=2:
+        elif number_of_answers == 'three' and value!= 1 and value!= 2:
+            raise ValueError(
+                f"The number you entered is {value}."
+            )
+
+    except ValueError as e:
+        print(f"Invalid data: {e} Please try again.\n")
+        return False
+
+    return True
+
+
+def coordinate_validation(value,grid_length):
+    '''
+    Function that checks if the user enters an integer.
+    Also checks if the the co-ordinate is valid.
+    '''
+    try:
+        value = int(value)
+        grid_length = int(grid_length)
+        if value not in range(7):
             raise ValueError(
                 f"The number you entered is {value}."
             )
