@@ -82,7 +82,7 @@ def difficulty_level():
     '''
     while True:
         print("Which type of challenge are you up for?")
-        user_level_choice = input("Press 1 for easy and 2 for hard\n")
+        user_level_choice = input("Press 1 for easy, 2 for medium and 3 for hard.\n")
         answer = "three"
 
         if initial_validation(user_level_choice, answer):
@@ -90,12 +90,15 @@ def difficulty_level():
 
     user_level_choice = int(user_level_choice)
 
-    # The user would have a choice between the easy and hard game.
+    # The user would have a choice between the easy, medium and hard game.
     if user_level_choice == 1:
         game_logic(6,25)
     
     elif user_level_choice == 2:
-        game_logic(8,45)
+        game_logic(7,36)
+
+    elif user_level_choice == 3:
+        game_logic(8,49)
 
 grid = []
 cpu_grid = []
@@ -215,10 +218,7 @@ def game_logic(wide,number):
         player_input_row = int(player_input_row) - 1
         player_input_col = int(player_input_col) - 1 
 
-        print(f"Co-ordinates entered: {co_ordinates_used}")
-        print(f"{cpu_row},{cpu_col}")
-        print(f"{cpu_row2},{cpu_col2}")
-        print(f"{cpu_row3},{cpu_col3}")
+        print(f"Co-ordinates entered: {co_ordinates_used}\n")
 
         '''    
         This will notify the system that a ship has been sank.
@@ -285,6 +285,7 @@ def board_format(board):
     for row in board:
         print(" ".join(row))
 
+
 def print_boards():
     print("Player's Board:")
     board_format(grid)
@@ -310,7 +311,7 @@ def initial_validation(value,number_of_answers):
             raise ValueError(
                 f"The number you entered is {value}."
             )
-        elif number_of_answers == 'three' and value!= 1 and value!= 2:
+        elif number_of_answers == 'three' and value!= 1 and value!= 2 and value!=3:
             raise ValueError(
                 f"The number you entered is {value}."
             )
