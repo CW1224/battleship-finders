@@ -255,7 +255,6 @@ def game_logic(wide,number):
             if co_ordinates_entered.issubset(cpu_co_ordinates_used):
                 continue
             else:
-                co_ordinates_used.extend(co_ordinates_entered)
                 break
 
         if (cpu_guess_row == ship_row and cpu_guess_col == ship_col) \
