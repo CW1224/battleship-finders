@@ -15,7 +15,7 @@ def accept_game():
         print("")
 
         # Determining if the answer the user imputs is valid or not.
-        if initial_validation(user_accept,answer):
+        if initial_validation(user_accept, answer):
             break
     
     user_accept = int(user_accept)
@@ -29,14 +29,14 @@ def accept_game():
             print("")
 
             # Determining if the answer the user imputs is valid or not.
-            if initial_validation(instructions,answer):
+            if initial_validation(instructions, answer):
                 break
 
         instructions = int(instructions)
         
         if instructions == 1:
             show_instructions()
-    # Pressing 0 would allow the user to skip the instructions and go straight to the page where the difficulty level is picked.
+        # Inserting 0 allows user to go straight to difficulty choice.
         elif instructions == 0:
             difficulty_level()
 
@@ -50,23 +50,23 @@ def show_instructions():
     print("The goal of this game is to sink all of the opponant's ships.")
     print("You will have a choice between grid sizes of 6x6 or 8x8.")
     print("Both players will have a total of four ships.")
-    print("You will have a total of 24 bullets.")
+    print("You will have a limited number of bullets.")
     print("Choose where you want to aim by typing in the co-ordinates.")
     print("The co-ordinates should be expressed as x,y.")
     print("An example would be 3,4 .")
     print("The top left of the grid is 1,1 .")
     print("As you go across the grid, the first number(x) increases.")
     print("As you go down the grid, the second number (y) increases.")
-    print("The game ends when all the ships have been sank or when your bullet runs out.")
+    print("The game ends when the bullets run out or when all ships are sank")
     print("Think carefully and enjoy the game!\n")
 
     while True: 
         # Determining if the answer the user imputs is valid or not.
-        instructions_read = input("Press 1 when you have finished reading the instructions.\n")
+        instructions_read = input("Press 1 when you have finished.\n")
         answer = 'one'
         print("")
 
-        if initial_validation(instructions_read,answer):
+        if initial_validation(instructions_read, answer):
             break
     
     instructions_read = int(instructions_read)
@@ -81,8 +81,10 @@ def difficulty_level():
     There are two choices altogether.
     '''
     while True:
-        print("Which type of challenge are you up for?")
-        user_level_choice = input("Press 1 for easy, 2 for medium, 3 for hard and 4 for impossible.\n")
+        print("Which type of challenge are you up for?\n")
+        print("Press 1 for the easy grid, 2 for medium")
+        print("3 for hard and 4 for impossible.")
+        user_level_choice = input("Insert 1, 2, 3 or 4.\n")
         answer = "four"
 
         if initial_validation(user_level_choice, answer):
@@ -90,50 +92,49 @@ def difficulty_level():
 
     user_level_choice = int(user_level_choice)
 
-    # The user would have a choice between the easy, medium, hard and impossible game.
+    # The user would have a choice between the four different grid sizes.
     if user_level_choice == 1:
-        game_logic(5,16)
+        game_logic(5, 20)
     
     elif user_level_choice == 2:
-        game_logic(6,25)
+        game_logic(6, 30)
 
     elif user_level_choice == 3:
-        game_logic(7,36)
+        game_logic(7, 40)
 
     elif user_level_choice == 4:
         game_logic(8, 49)
 
+
 grid = []
 cpu_grid = []
 
-def game_logic(wide,number):
+
+def game_logic(wide, number):
     '''
     This block of code was taken from iKelvvv and modified.
     Reference is given in the readme.
     The original would be pasted there.
     '''
     for x in range(wide):
-        #Generates the size of the playing board.
+        # Generates the size of the playing board.
         grid.append(["-"] * wide)
         cpu_grid.append(['-'] * wide)
     
     def player_ship_col(grid):
-        #Generates a random column's number of the player's ship.
+        # Generates a random column's number of the player's ship.
         return randint(0, len(grid) - 1)
-
 
     def player_ship_row(grid):
-        #Generates a random row's number of the player's ship.
+        # Generates a random row's number of the player's ship.
         return randint(0, len(grid) - 1)
 
-
     def cpu_ship_col(cpu_grid):
-        #Generates a random column's number of the computer's ship.
+        # Generates a random column's number of the computer's ship.
         return randint(0, len(cpu_grid) - 1)
 
-
     def cpu_ship_row(cpu_grid):
-        #Generates a random row's number of the computer's ship.
+        # Generates a random row's number of the computer's ship.
         return randint(0, len(cpu_grid) - 1)
 
     ship_col = player_ship_col(grid)
@@ -146,14 +147,14 @@ def game_logic(wide,number):
         Loop that doesn't allow the player's or cpu's ship 
         to be generated in the same location.
         '''
-        #The second ship's position
+        # The second ship's position
         ship_col2 = player_ship_col(grid)
         ship_row2 = player_ship_row(grid)
         cpu_col2 = cpu_ship_col(cpu_grid)
         cpu_row2 = cpu_ship_row(cpu_grid)
-        #The second ship's position's check
+        # The second ship's position's check
         if (ship_col2 != ship_col and ship_row2 != ship_row) and \
-        (cpu_col2 != cpu_col and cpu_row2 != cpu_row):
+           (cpu_col2 != cpu_col and cpu_row2 != cpu_row):
             # The third ship's position
             ship_col3 = player_ship_col(grid)
             ship_row3 = player_ship_row(grid)
@@ -161,24 +162,24 @@ def game_logic(wide,number):
             cpu_row3 = cpu_ship_row(cpu_grid)
             # The third ship's position's check
             if (ship_col3 != ship_col2 and ship_row3 != ship_row2) and \
-            (ship_col3 != ship_col and ship_row3 != ship_row) and \
-            (cpu_col3 != cpu_col2 and cpu_row3 != cpu_row2) and \
-            (cpu_col3 != cpu_col and cpu_row3 != cpu_row):
-                #The fourth ship's position
+               (ship_col3 != ship_col and ship_row3 != ship_row) and \
+               (cpu_col3 != cpu_col2 and cpu_row3 != cpu_row2) and \
+               (cpu_col3 != cpu_col and cpu_row3 != cpu_row):
+                # The fourth ship's position
                 ship_col4 = player_ship_col(grid)
                 ship_row4 = player_ship_row(grid)
                 cpu_col4 = cpu_ship_col(cpu_grid)
                 cpu_row4 = cpu_ship_row(cpu_grid)
-                #The fourth ship's position's check
+                # The fourth ship's position's check
                 if (ship_col4 != ship_col3 and ship_row4 != ship_row3) and \
-                (ship_col4 != ship_col2 and ship_row4 != ship_row2) and \
-                (ship_col4 != ship_col and ship_row4 != ship_row) and \
-                (cpu_col4 != cpu_col3 and cpu_row4 != cpu_row3) and \
-                (cpu_col4 != cpu_col2 and cpu_row4 != cpu_row2) and \
-                (cpu_col4 != cpu_col and cpu_row4 != cpu_row):
+                   (ship_col4 != ship_col2 and ship_row4 != ship_row2) and \
+                   (ship_col4 != ship_col and ship_row4 != ship_row) and \
+                   (cpu_col4 != cpu_col3 and cpu_row4 != cpu_row3) and \
+                   (cpu_col4 != cpu_col2 and cpu_row4 != cpu_row2) and \
+                   (cpu_col4 != cpu_col and cpu_row4 != cpu_row):
                     break
     
-    #Original position of the player's ships.
+    # Original position of the player's ships.
     grid[ship_row][ship_col] = "S"
     grid[ship_row2][ship_col2] = "S"
     grid[ship_row3][ship_col3] = "S"
@@ -188,7 +189,7 @@ def game_logic(wide,number):
 
     '''
     The code below executes the game.
-    The player will start with a certain number of bullets depending on difficulty.
+    The player will start with a number of bullets depending on grid size.
     Their aim is to sink all three of the opponent's ships.
     '''
     bullets = number
@@ -208,16 +209,17 @@ def game_logic(wide,number):
             player_input_row = input("Enter the horizontal co-ordinate here\n")
             player_input_col = input("Enter the vertical co-ordinate here\n")
 
-            print(f"The co-ordinate you entered is {player_input_row},{player_input_col}.")
+            print(f"You entered: {player_input_row},{player_input_col}.")
                 
             '''
             This statement validates the code.
             Also prevents the same co-ordinate from being entered twice.
             Which also prevents the same ship from being sunk twice.
             '''
-            if coordinate_validation(player_input_row,7) and coordinate_validation(player_input_col,7):
-                co_ordinates_entered_alone = [(int(player_input_row),int(player_input_col))]
-                co_ordinates_entered = set(co_ordinates_entered_alone)
+            if coordinate_validation(player_input_row, 7) and \
+               coordinate_validation(player_input_col, 7):
+                co_ordinates = [(int(player_input_row), int(player_input_col))]
+                co_ordinates_entered = set(co_ordinates)
 
                 if co_ordinates_entered.issubset(co_ordinates_used):
                     print("You have already entered this co-ordinate.")
@@ -230,7 +232,8 @@ def game_logic(wide,number):
 
         '''
         This allows the player's co-ordinates to sync with the system's.
-        The system's first grid has the co-ordinates (0,0) which is one less than the person's input at (1,1).
+        The system's first grid has the co-ordinates (0,0)
+        which is one less than the player's input at (1,1).
         '''
         player_input_row = int(player_input_row) - 1
         player_input_col = int(player_input_col) - 1 
@@ -242,8 +245,8 @@ def game_logic(wide,number):
         This would also mark the spot where a ship isn't located.
         '''
         if (player_input_row == cpu_row and player_input_col == cpu_col) \
-            or (player_input_row == cpu_row2 and player_input_col == cpu_col2) \
-            or (player_input_row == cpu_row3 and player_input_col == cpu_col3) \
+            or (player_input_row == cpu_row2 and player_input_col == cpu_col2)\
+            or (player_input_row == cpu_row3 and player_input_col == cpu_col3)\
             or (player_input_row == cpu_row4 and player_input_col == cpu_col4):
             cpu_grid[player_input_row][player_input_col] = 'E'
             print("Hit")
@@ -277,8 +280,8 @@ def game_logic(wide,number):
                 break
 
         if (cpu_guess_row == ship_row and cpu_guess_col == ship_col) \
-            or (cpu_guess_row == ship_row2 and cpu_guess_col == ship_col2) \
-            or (cpu_guess_row == ship_row3 and cpu_guess_col == ship_col3) \
+           or (cpu_guess_row == ship_row2 and cpu_guess_col == ship_col2) \
+           or (cpu_guess_row == ship_row3 and cpu_guess_col == ship_col3) \
             or (cpu_guess_row == ship_row4 and cpu_guess_col == ship_col4):
             grid[cpu_guess_row][cpu_guess_col] = 'E'
             print("The computer sank your ship")
