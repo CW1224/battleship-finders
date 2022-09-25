@@ -382,4 +382,6 @@ while True:
     if continue_game != 1:
         break
 
-print("In order to play again, press the run button")
+print("If you pressed the wrong button for the last question,")
+print("you can press the run code button above")
+print("to play again.")
