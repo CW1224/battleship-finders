@@ -190,10 +190,18 @@ def easy():
 
                     if coordinate_validation(player_input_row,7) and coordinate_validation(player_input_col,7):
                         print("Data is valid")
-                        bullets -= 1
-                        bullets_used += 1
-                        co_ordinates_used.append([player_input_row],[player_input_col])
-                        break
+                        co_ordinates_entered_alone = [(int(player_input_row),int(player_input_col))]
+                        co_ordinates_entered = set(co_ordinates_entered_alone)
+
+                        if co_ordinates_entered.issubset(co_ordinates_used):
+                            print("welldone\n")
+                        else:
+                            co_ordinates_used.extend(co_ordinates_entered)
+                            bullets -= 1
+                            bullets_used += 1
+                            break    
+                            
+                
 
                 '''
                 This allows the player's co-ordinates to sync with the system's.
@@ -202,6 +210,7 @@ def easy():
                 player_input_row = int(player_input_row) - 1
                 player_input_col = int(player_input_col) - 1 
 
+                print(co_ordinates_used)
                 print(f"{cpu_row},{cpu_col}")
                 print(f"{cpu_row2},{cpu_col2}")
                 print(f"{cpu_row3},{cpu_col3}")
@@ -225,7 +234,7 @@ def easy():
             elif bullets == 0:
                 print(f"Too bad!\n You have no more bullets left.\n You have {ships_remaining} ships remaining\n")
 
-    start_game(25)
+    start_game(5)
 
 
 def hard():
@@ -287,7 +296,7 @@ def coordinate_validation(value,grid_length):
         value = int(value)
         if value not in range(grid_length):
             raise ValueError(
-                f"The number you entered is {value}."
+                f"The number you entered is {value}. It is not within the length of the board."
             )
 
     except ValueError as e:
