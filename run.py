@@ -92,25 +92,25 @@ def difficulty_level():
 
     # The user would have a choice between the easy and hard game.
     if user_level_choice == 1:
-        easy()
+        game_logic(6,25)
     
     elif user_level_choice == 2:
-        hard()
+        game_logic(8,45)
 
 grid = []
 cpu_grid = []
 
-def easy():
+def game_logic(wide,number):
     '''
     Function that generates the easy grid or the 6 x 6 grid.
     This block of code was taken from iKelvvv and modified.
     Reference is given in the readme.
     The original would be pasted there.
     '''
-    for x in range(6):
+    for x in range(wide):
         #Generates the size of the playing board.
-        grid.append(["-"] * 6)
-        cpu_grid.append(['-'] * 6)
+        grid.append(["-"] * wide)
+        cpu_grid.append(['-'] * wide)
     
     def player_ship_col(grid):
         #Generates a random column's number of the player's ship.
@@ -156,141 +156,130 @@ def easy():
             (cpu_col3 != cpu_col2 and cpu_row3 != cpu_row2) and \
             (cpu_col3 != cpu_col and cpu_row3 != cpu_row):
                 break
-
+    
+    #Original position of the player's ships.
     grid[ship_row][ship_col] = "S"
     grid[ship_row2][ship_col2] = "S"
     grid[ship_row3][ship_col3] = "S"
 
     print_boards()
 
-    def start_game(number):
-            '''
-            Function that allows the game to run.
-            The player will start with 25 bullets.
-            Their aim is to sink all three of the opponent's ships.
-            '''
-            bullets = number
-            ships_remaining = 3
-            bullets_used = 0
-            co_ordinates_used = []
+    '''
+    The code below executes the game.
+    The player will start with a certain number of bullets depending on difficulty.
+    Their aim is to sink all three of the opponent's ships.
+    '''
+    bullets = number
+    ships_remaining = 3
+    bullets_used = 0
+    co_ordinates_used = []
 
-            while bullets != 0 and ships_remaining != 0:
-                '''
-                Loop that will continue until the bullet runs out
-                or until all ships are sank.
-                '''
-                while True:
+    while bullets != 0 and ships_remaining != 0:
+        '''
+        Loop that will continue until the bullet runs out
+        or until all ships are sank.
+        '''
+        while True:
                     
-                    print("Where do you want to aim?")
+            print("Where do you want to aim?")
 
-                    player_input_row = input("Enter the horizontal co-ordinate here\n")
-                    player_input_col = input("Enter the vertical co-ordinate here\n")
+            player_input_row = input("Enter the horizontal co-ordinate here\n")
+            player_input_col = input("Enter the vertical co-ordinate here\n")
 
-                    print(f"The co-ordinate you entered is {player_input_row},{player_input_col}.")
+            print(f"The co-ordinate you entered is {player_input_row},{player_input_col}.")
+                
+            '''
+            This statement validates the code.
+            Also prevents the same co-ordinate from being entered twice.
+            Which also prevents the same ship from being sunk twice.
+            '''
+            if coordinate_validation(player_input_row,7) and coordinate_validation(player_input_col,7):
+                print("Data is valid")
+                co_ordinates_entered_alone = [(int(player_input_row),int(player_input_col))]
+                co_ordinates_entered = set(co_ordinates_entered_alone)
+                print(co_ordinates_used)
 
-                    '''
-                    This statement validates the code.
-                    Also prevents the same co-ordinate from being entered twice.
-                    Which also prevents the same ship from being sunk twice.
-                    '''
-                    if coordinate_validation(player_input_row,7) and coordinate_validation(player_input_col,7):
-                        print("Data is valid")
-                        co_ordinates_entered_alone = [(int(player_input_row),int(player_input_col))]
-                        co_ordinates_entered = set(co_ordinates_entered_alone)
-
-                        if co_ordinates_entered.issubset(co_ordinates_used):
-                            print("You have already entered this co-ordinate.")
-                            print("Please try again\n")
-                        else:
-                            co_ordinates_used.extend(co_ordinates_entered)
-                            bullets -= 1
-                            bullets_used += 1
-                            break    
-
-                '''
-                This allows the player's co-ordinates to sync with the system's.
-                The system's first grid has the co-ordinates (0,0) which is one less than the person's input at (1,1).
-                '''
-                player_input_row = int(player_input_row) - 1
-                player_input_col = int(player_input_col) - 1 
-
-                print(f"Co-ordinates entered: {co_ordinates_used}")
-                print(f"{cpu_row},{cpu_col}")
-                print(f"{cpu_row2},{cpu_col2}")
-                print(f"{cpu_row3},{cpu_col3}")
-
-                '''    
-                This will notify the system that a ship has been sank.
-                This would also mark the spot where a ship isn't located.
-                '''
-                if (player_input_row == cpu_row and player_input_col == cpu_col) \
-                    or (player_input_row == cpu_row2 and player_input_col == cpu_col2) \
-                    or (player_input_row == cpu_row3 and player_input_col == cpu_col3):
-                    cpu_grid[player_input_row][player_input_col] = 'E'
-                    print("Hit")
-                    ships_remaining -= 1
+                if co_ordinates_entered.issubset(co_ordinates_used):
+                    print("You have already entered this co-ordinate.")
+                    print("Please try again\n")
                 else:
-                    cpu_grid[player_input_row][player_input_col] = 'X'
-                    print("You missed")
+                    co_ordinates_used.extend(co_ordinates_entered)
+                    bullets -= 1
+                    bullets_used += 1
+                    break    
 
-                if ships_remaining == 0 or bullets == 0:
-                    break
+        '''
+        This allows the player's co-ordinates to sync with the system's.
+        The system's first grid has the co-ordinates (0,0) which is one less than the person's input at (1,1).
+        '''
+        player_input_row = int(player_input_row) - 1
+        player_input_col = int(player_input_col) - 1 
+
+        print(f"Co-ordinates entered: {co_ordinates_used}")
+        print(f"{cpu_row},{cpu_col}")
+        print(f"{cpu_row2},{cpu_col2}")
+        print(f"{cpu_row3},{cpu_col3}")
+
+        '''    
+        This will notify the system that a ship has been sank.
+        This would also mark the spot where a ship isn't located.
+        '''
+        if (player_input_row == cpu_row and player_input_col == cpu_col) \
+            or (player_input_row == cpu_row2 and player_input_col == cpu_col2) \
+            or (player_input_row == cpu_row3 and player_input_col == cpu_col3):
+            cpu_grid[player_input_row][player_input_col] = 'E'
+            print("Hit")
+            ships_remaining -= 1
+        else:
+            cpu_grid[player_input_row][player_input_col] = 'X'
+            print("You missed")
+
+        if ships_remaining == 0 or bullets == 0:
+            break
             
-                '''
-                The computer's action will do the same thing as the player's.
-                The computer should not generate the same co-ordinates.
-                The computer's guess will show on the player's board.
-                '''
-                ships_remaining_cpu = 3
+        '''
+        The computer's action will do the same thing as the player's.
+        The computer should not generate the same co-ordinates.
+        The computer's guess will show on the player's board.
+        '''
+        ships_remaining_cpu = 3
 
-                while True:
-                    cpu_guess_row = player_ship_row(grid)
-                    cpu_guess_col = player_ship_col(grid)
+        while True:
+            cpu_guess_row = player_ship_row(grid)
+            cpu_guess_col = player_ship_col(grid)
 
-                    cpu_co_ordinates_used = []
-                    cpu_co_ordinates_entered_alone = [(int(cpu_guess_row),int(cpu_guess_col))]
-                    cpu_co_ordinates_entered = set(cpu_co_ordinates_entered_alone)
+            cpu_co_ordinates_used = []
+            cpu_co_ordinates_entered_alone = [(int(cpu_guess_row),int(cpu_guess_col))]
+            cpu_co_ordinates_entered = set(cpu_co_ordinates_entered_alone)
 
-                    if co_ordinates_entered.issubset(cpu_co_ordinates_used):
-                        continue
-                    else:
-                        co_ordinates_used.extend(co_ordinates_entered)
-                        break
+            if co_ordinates_entered.issubset(cpu_co_ordinates_used):
+                continue
+            else:
+                co_ordinates_used.extend(co_ordinates_entered)
+                break
 
-                if (cpu_guess_row == ship_row and cpu_guess_col == ship_col) \
-                    or (cpu_guess_row == ship_row2 and cpu_guess_col == ship_col2) \
-                    or (cpu_guess_row == ship_row3 and cpu_guess_col == ship_col3):
-                    grid[cpu_guess_row][cpu_guess_col] = 'E'
-                    print("The computer sank your ship")
-                    ships_remaining_cpu -= 1
-                else:
-                    grid[cpu_guess_row][cpu_guess_col] = 'X'
-                    print("The computer missed")
+        if (cpu_guess_row == ship_row and cpu_guess_col == ship_col) \
+            or (cpu_guess_row == ship_row2 and cpu_guess_col == ship_col2) \
+            or (cpu_guess_row == ship_row3 and cpu_guess_col == ship_col3):
+            grid[cpu_guess_row][cpu_guess_col] = 'E'
+            print("The computer sank your ship")
+            ships_remaining_cpu -= 1
+        else:
+            grid[cpu_guess_row][cpu_guess_col] = 'X'
+            print("The computer missed")
 
-                print_boards()
+        print_boards()
 
-                if ships_remaining_cpu == 0:
-                    break
+        if ships_remaining_cpu == 0:
+            break
 
-            if ships_remaining == 0:
-                print(f"Congratulations!\nYou have sank all your opponent's ships with {bullets_used} bullets.\n")
-            elif bullets == 0:
-                print(f"Too bad!\n You have no more bullets left.\n There are {ships_remaining} ships remaining.\n")
-            elif ships_remaining_cpu == 0:
-                print(f"The computer has sank all your ships")
-                print(f"There are {ships_remaining} ships remaining.")
-
-    start_game(5)
-
-
-def hard():
-    # Function that generates the easy grid or the 8 x 8 grid.
-    for x in range(8):
-        #Generates the size of the playing board.
-        grid.append(["-"] * 8)
-        cpu_grid.append(['-'] * 8)
-
-    print_boards()
+    if ships_remaining == 0:
+        print(f"Congratulations!\nYou have sank all your opponent's ships with {bullets_used} bullets.\n")
+    elif bullets == 0:
+        print(f"Too bad!\n You have no more bullets left.\n There are {ships_remaining} ships remaining.\n")
+    elif ships_remaining_cpu == 0:
+        print(f"The computer has sank all your ships")
+        print(f"There are {ships_remaining} ships remaining.")
 
 
 def board_format(board):
