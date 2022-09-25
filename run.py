@@ -110,7 +110,7 @@ def easy():
     for x in range(6):
         #Generates the size of the playing board.
         grid.append(["-"] * 6)
-        cpu_grid.append(['_'] * 6)
+        cpu_grid.append(['-'] * 6)
     
     def player_ship_col(grid):
         #Generates a random column's number of the player's ship.
@@ -194,7 +194,8 @@ def easy():
                         co_ordinates_entered = set(co_ordinates_entered_alone)
 
                         if co_ordinates_entered.issubset(co_ordinates_used):
-                            print("welldone\n")
+                            print("You have already entered this co-ordinate.")
+                            print("Please try again\n")
                         else:
                             co_ordinates_used.extend(co_ordinates_entered)
                             bullets -= 1
@@ -210,21 +211,22 @@ def easy():
                 player_input_row = int(player_input_row) - 1
                 player_input_col = int(player_input_col) - 1 
 
-                print(co_ordinates_used)
+                print(f"Co-ordinates entered: {co_ordinates_used}")
                 print(f"{cpu_row},{cpu_col}")
                 print(f"{cpu_row2},{cpu_col2}")
                 print(f"{cpu_row3},{cpu_col3}")
 
-                '''
-                This will notify the system that a ship has been sank.
-                This won't allow the same ship to be sank twice.
-                '''
+                # This will notify the system that a ship has been sank.
                 if (player_input_row == cpu_row and player_input_col == cpu_col) \
                     or (player_input_row == cpu_row2 and player_input_col == cpu_col2) \
                     or (player_input_row == cpu_row3 and player_input_col == cpu_col3):
+                    cpu_grid[player_input_row][player_input_col] = 'E'
                     print("Hit")
                     ships_remaining -= 1
-                    
+                else:
+                    cpu_grid[player_input_row][player_input_col] = 'X'
+                
+                print_boards()
 
                 if ships_remaining == 0 or bullets == 0:
                     break
@@ -242,7 +244,7 @@ def hard():
     for x in range(8):
         #Generates the size of the playing board.
         grid.append(["-"] * 8)
-        cpu_grid.append(['_'] * 8)
+        cpu_grid.append(['-'] * 8)
 
     print_boards()
 
@@ -257,6 +259,7 @@ def print_boards():
     print("")
     print("Computer's Board:")
     board_format(cpu_grid)
+    print("")
 
 
 # This block of code is taken from Love Sandwiches and modified accordingly.
