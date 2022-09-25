@@ -245,9 +245,9 @@ def game_logic(wide, number):
         This would also mark the spot where a ship isn't located.
         '''
         if (player_input_row == cpu_row and player_input_col == cpu_col) \
-            or (player_input_row == cpu_row2 and player_input_col == cpu_col2)\
-            or (player_input_row == cpu_row3 and player_input_col == cpu_col3)\
-            or (player_input_row == cpu_row4 and player_input_col == cpu_col4):
+           or (player_input_row == cpu_row2 and player_input_col == cpu_col2)\
+           or (player_input_row == cpu_row3 and player_input_col == cpu_col3)\
+           or (player_input_row == cpu_row4 and player_input_col == cpu_col4):
             cpu_grid[player_input_row][player_input_col] = 'E'
             print("Hit")
             ships_remaining -= 1
@@ -271,8 +271,8 @@ def game_logic(wide, number):
             cpu_guess_col = player_ship_col(grid)
 
             cpu_co_ordinates_used = []
-            cpu_co_ordinates_entered_alone = [(int(cpu_guess_row),int(cpu_guess_col))]
-            cpu_co_ordinates_entered = set(cpu_co_ordinates_entered_alone)
+            cpu_co_ordinates_alone = [(int(cpu_guess_row), int(cpu_guess_col))]
+            cpu_co_ordinates_entered = set(cpu_co_ordinates_alone)
 
             if co_ordinates_entered.issubset(cpu_co_ordinates_used):
                 continue
@@ -282,7 +282,7 @@ def game_logic(wide, number):
         if (cpu_guess_row == ship_row and cpu_guess_col == ship_col) \
            or (cpu_guess_row == ship_row2 and cpu_guess_col == ship_col2) \
            or (cpu_guess_row == ship_row3 and cpu_guess_col == ship_col3) \
-            or (cpu_guess_row == ship_row4 and cpu_guess_col == ship_col4):
+           or (cpu_guess_row == ship_row4 and cpu_guess_col == ship_col4):
             grid[cpu_guess_row][cpu_guess_col] = 'E'
             print("The computer sank your ship")
             ships_remaining_cpu -= 1
@@ -296,9 +296,12 @@ def game_logic(wide, number):
             break
 
     if ships_remaining == 0:
-        print(f"Congratulations!\nYou have sank all your opponent's ships with {bullets_used} bullets.\n")
+        print("Congratulations!")
+        print(f"You have sank all your opponent's ships with {bullets_used} bullets.\n")
     elif bullets == 0:
-        print(f"Too bad!\n You have no more bullets left.\n There are {ships_remaining} ships remaining.\n")
+        print("Too bad!")
+        print("You have no more bullets left.")
+        print(f"There are {ships_remaining} ships remaining.\n")
     elif ships_remaining_cpu == 0:
         print(f"The computer has sank all your ships")
         print(f"There are {ships_remaining} ships remaining.")
