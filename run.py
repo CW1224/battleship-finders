@@ -178,7 +178,7 @@ def game_logic(wide, number):
                    (cpu_col4 != cpu_col2 and cpu_row4 != cpu_row2) and \
                    (cpu_col4 != cpu_col and cpu_row4 != cpu_row):
                     break
-    
+
     # Original position of the player's ships.
     grid[ship_row][ship_col] = "S"
     grid[ship_row2][ship_col2] = "S"
@@ -271,10 +271,10 @@ def game_logic(wide, number):
             cpu_guess_col = player_ship_col(grid)
 
             cpu_co_ordinates_used = []
-            cpu_co_ordinates_alone = [(int(cpu_guess_row), int(cpu_guess_col))]
+            cpu_co_ordinates_alone = [(int(1), int(2))]
             cpu_co_ordinates_entered = set(cpu_co_ordinates_alone)
 
-            if co_ordinates_entered.issubset(cpu_co_ordinates_used):
+            if cpu_co_ordinates_entered.issubset(cpu_co_ordinates_used):
                 continue
             else:
                 break
@@ -297,13 +297,14 @@ def game_logic(wide, number):
 
     if ships_remaining == 0:
         print("Congratulations!")
-        print(f"You have sank all your opponent's ships with {bullets_used} bullets.\n")
+        print("You have sank all your opponent's ships") 
+        print(f"with {bullets_used} bullets.\n")
     elif bullets == 0:
         print("Too bad!")
         print("You have no more bullets left.")
         print(f"There are {ships_remaining} ships remaining.\n")
     elif ships_remaining_cpu == 0:
-        print(f"The computer has sank all your ships")
+        print("The computer has sank all your ships")
         print(f"There are {ships_remaining} ships remaining.")
 
 
@@ -322,24 +323,28 @@ def print_boards():
 
 
 # This block of code is taken from Love Sandwiches and modified accordingly.
-def initial_validation(value,number_of_answers):
+def initial_validation(value, number_of_answers):
     '''
     The function that would determine if the data entered is valid or not.
     Depending on the number of answers, one of the function below would apply.
     '''
     try:
         value = int(value)
-        if number_of_answers == 'two' and value != 0 and value!= 1:
+        if number_of_answers == 'two' and value != 0 and value != 1:
             raise ValueError(
                 f"The number you entered is {value}. Please enter with 0 or 1."
             )
-        elif number_of_answers == 'one' and value!= 1:
+        elif number_of_answers == 'one' and value != 1:
             raise ValueError(
                 f"The number you entered is {value}. Please enter with 1."
             )
-        elif number_of_answers == 'four' and value!= 1 and value!= 2 and value!=3 and value!=4:
+        elif number_of_answers == 'four' and value != 1 and value != 2:
             raise ValueError(
-                f"The number you entered is {value} Please enter with 1, 2, 3 or 4."
+                f"You have entered {value}. Please enter with 1, 2, 3 or 4."
+            )
+        elif number_of_answers == 'four' and value != 3 and value != 4:
+            raise ValueError(
+                f"You have entered {value}. Please enter with 1, 2, 3 or 4."
             )
 
     except ValueError as e:
@@ -349,7 +354,7 @@ def initial_validation(value,number_of_answers):
     return True
 
 
-def coordinate_validation(value,grid_length):
+def coordinate_validation(value, grid_length):
     '''
     Function that checks if the user enters an integer.
     Also checks if the the co-ordinate is valid.
@@ -358,8 +363,7 @@ def coordinate_validation(value,grid_length):
         value = int(value)
         if value not in range(grid_length):
             raise ValueError(
-                f"The number you entered is {value}. It is not within the length of the board."
-            )
+                f"You have entered {value}.\n It is not within the range.")
 
     except ValueError as e:
         print(f"Invalid data: {e} Please try again.\n")
