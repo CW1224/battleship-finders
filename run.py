@@ -3,21 +3,21 @@ from random import randint
 
 def accept_game():
     '''
-    Function for the user to accept the challenge. 
-    Choosing yes would bring the user to the next part of the game. 
+    Function for the user to accept the challenge.
+    Choosing yes would bring the user to the next part of the game.
     Choosing no means that the user would stay on the same page.
     '''
     while True:
         print("Would you like to start the game?")
         user_accept = input("Press 1 for yes\n")
         answer = 'one'
-        
+
         print("")
 
         # Determining if the answer the user imputs is valid or not.
         if initial_validation(user_accept, answer):
             break
-    
+
     user_accept = int(user_accept)
 
     # Pressing 1 would allow the instruction question to show.
@@ -33,7 +33,7 @@ def accept_game():
                 break
 
         instructions = int(instructions)
-        
+
         if instructions == 1:
             show_instructions()
         # Inserting 0 allows user to go straight to difficulty choice.
@@ -44,7 +44,7 @@ def accept_game():
 def show_instructions():
     '''
     Function that gives the user a choice to read or not read the instructions.
-    Choosing yes would allow the user to read the instructions. 
+    Choosing yes would allow the user to read the instructions.
     Choosing no would bring the user to the next part of the game.
     '''
     print("The goal of this game is to sink all of the opponant's ships.")
@@ -60,7 +60,7 @@ def show_instructions():
     print("The game ends when the bullets run out or when all ships are sank")
     print("Think carefully and enjoy the game!\n")
 
-    while True: 
+    while True:
         # Determining if the answer the user imputs is valid or not.
         instructions_read = input("Press 1 when you have finished.\n")
         answer = 'one'
@@ -68,7 +68,7 @@ def show_instructions():
 
         if initial_validation(instructions_read, answer):
             break
-    
+
     instructions_read = int(instructions_read)
 
     if instructions_read == 1:
@@ -95,7 +95,7 @@ def difficulty_level():
     # The user would have a choice between the four different grid sizes.
     if user_level_choice == 1:
         game_logic(5, 20)
-    
+
     elif user_level_choice == 2:
         game_logic(6, 30)
 
@@ -120,7 +120,7 @@ def game_logic(wide, number):
         # Generates the size of the playing board.
         grid.append(["-"] * wide)
         cpu_grid.append(['-'] * wide)
-    
+
     def player_ship_col(grid):
         # Generates a random column's number of the player's ship.
         return randint(0, len(grid) - 1)
@@ -141,12 +141,9 @@ def game_logic(wide, number):
     ship_row = player_ship_row(grid)
     cpu_col = cpu_ship_col(cpu_grid)
     cpu_row = cpu_ship_row(cpu_grid)
-    
+
+    # Loop that doesn't allow ship to be placed at same space.
     while True:
-        '''
-        Loop that doesn't allow the player's or cpu's ship 
-        to be generated in the same location.
-        '''
         # The second ship's position
         ship_col2 = player_ship_col(grid)
         ship_row2 = player_ship_row(grid)
@@ -187,40 +184,30 @@ def game_logic(wide, number):
 
     print_boards()
 
-    '''
-    The code below executes the game.
-    The player will start with a number of bullets depending on grid size.
-    Their aim is to sink all three of the opponent's ships.
-    '''
+    # Code that allows the game to be played.
     bullets = number
     ships_remaining = 4
     bullets_used = 0
     co_ordinates_used = []
 
+    # Loop to continue until statements fulfilled.
     while bullets != 0 and ships_remaining != 0:
-        '''
-        Loop that will continue until the bullet runs out
-        or until all ships are sank.
-        '''
         while True:
-                    
+
             print("Where do you want to aim?")
 
             player_input_row = input("Enter the horizontal co-ordinate here\n")
             player_input_col = input("Enter the vertical co-ordinate here\n")
 
             print(f"You entered: {player_input_row},{player_input_col}.")
-                
-            '''
-            This statement validates the code.
-            Also prevents the same co-ordinate from being entered twice.
-            Which also prevents the same ship from being sunk twice.
-            '''
+
+            # This statement validates the code.
             if coordinate_validation(player_input_row, 7) and \
                coordinate_validation(player_input_col, 7):
                 co_ordinates = [(int(player_input_row), int(player_input_col))]
                 co_ordinates_entered = set(co_ordinates)
 
+                # Prevents the same co-ordinate from being entered twice.
                 if co_ordinates_entered.issubset(co_ordinates_used):
                     print("You have already entered this co-ordinate.")
                     print("Please try again\n")
@@ -228,22 +215,16 @@ def game_logic(wide, number):
                     co_ordinates_used.extend(co_ordinates_entered)
                     bullets -= 1
                     bullets_used += 1
-                    break    
+                    break
 
-        '''
-        This allows the player's co-ordinates to sync with the system's.
-        The system's first grid has the co-ordinates (0,0)
-        which is one less than the player's input at (1,1).
-        '''
+        # This allows the player's co-ordinates to sync with the system's.
+        # (1,1) for player and (0,0) for system are in the same place.
         player_input_row = int(player_input_row) - 1
-        player_input_col = int(player_input_col) - 1 
+        player_input_col = int(player_input_col) - 1
 
         print(f"Co-ordinates entered: {co_ordinates_used}\n")
 
-        '''    
-        This will notify the system that a ship has been sank.
-        This would also mark the spot where a ship isn't located.
-        '''
+        # This will notify the system that a ship has been sank.
         if (player_input_row == cpu_row and player_input_col == cpu_col) \
            or (player_input_row == cpu_row2 and player_input_col == cpu_col2)\
            or (player_input_row == cpu_row3 and player_input_col == cpu_col3)\
@@ -251,19 +232,14 @@ def game_logic(wide, number):
             cpu_grid[player_input_row][player_input_col] = 'E'
             print("Hit")
             ships_remaining -= 1
-        else:
+        else:  # This would also mark the spot where a ship isn't located.
             cpu_grid[player_input_row][player_input_col] = 'X'
             print("You missed")
 
         if ships_remaining == 0 or bullets == 0:
             break
-            
-        '''
-        The computer's action will do the same thing as the player's.
-        The computer should not generate the same co-ordinates.
-        The computer's guess will show on the player's board
-        as an x for an incorrect guess and an e for a correct one.
-        '''
+
+        # The computer's action are the same thing as the player's.
         ships_remaining_cpu = 4
 
         while True:
@@ -274,19 +250,23 @@ def game_logic(wide, number):
             cpu_co_ordinates_alone = [(int(1), int(2))]
             cpu_co_ordinates_entered = set(cpu_co_ordinates_alone)
 
+            # The computer should not generate the same co-ordinates.
             if cpu_co_ordinates_entered.issubset(cpu_co_ordinates_used):
                 continue
             else:
                 break
 
+        # The computer's guess will show on the player's board.
         if (cpu_guess_row == ship_row and cpu_guess_col == ship_col) \
            or (cpu_guess_row == ship_row2 and cpu_guess_col == ship_col2) \
            or (cpu_guess_row == ship_row3 and cpu_guess_col == ship_col3) \
            or (cpu_guess_row == ship_row4 and cpu_guess_col == ship_col4):
+
+            # An e for a correct guess.
             grid[cpu_guess_row][cpu_guess_col] = 'E'
             print("The computer sank your ship")
             ships_remaining_cpu -= 1
-        else:
+        else:  # An x for an incorrect guess.
             grid[cpu_guess_row][cpu_guess_col] = 'X'
             print("The computer missed")
 
@@ -297,7 +277,7 @@ def game_logic(wide, number):
 
     if ships_remaining == 0:
         print("Congratulations!")
-        print("You have sank all your opponent's ships") 
+        print("You have sank all your opponent's ships")
         print(f"with {bullets_used} bullets.\n")
     elif bullets == 0:
         print("Too bad!")
