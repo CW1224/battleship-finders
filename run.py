@@ -144,26 +144,43 @@ def game_logic(wide,number):
         Loop that doesn't allow the player's or cpu's ship 
         to be generated in the same location.
         '''
+        #The second ship's position
         ship_col2 = player_ship_col(grid)
         ship_row2 = player_ship_row(grid)
         cpu_col2 = cpu_ship_col(cpu_grid)
         cpu_row2 = cpu_ship_row(cpu_grid)
+        #The second ship's position's check
         if (ship_col2 != ship_col and ship_row2 != ship_row) and \
         (cpu_col2 != cpu_col and cpu_row2 != cpu_row):
+            # The third ship's position
             ship_col3 = player_ship_col(grid)
             ship_row3 = player_ship_row(grid)
             cpu_col3 = cpu_ship_col(cpu_grid)
             cpu_row3 = cpu_ship_row(cpu_grid)
+            # The third ship's position's check
             if (ship_col3 != ship_col2 and ship_row3 != ship_row2) and \
             (ship_col3 != ship_col and ship_row3 != ship_row) and \
             (cpu_col3 != cpu_col2 and cpu_row3 != cpu_row2) and \
             (cpu_col3 != cpu_col and cpu_row3 != cpu_row):
-                break
+                #The fourth ship's position
+                ship_col4 = player_ship_col(grid)
+                ship_row4 = player_ship_row(grid)
+                cpu_col4 = cpu_ship_col(cpu_grid)
+                cpu_row4 = cpu_ship_row(cpu_grid)
+                #The fourth ship's position's check
+                if (ship_col4 != ship_col3 and ship_row4 != ship_row3) and \
+                (ship_col4 != ship_col2 and ship_row4 != ship_row2) and \
+                (ship_col4 != ship_col and ship_row4 != ship_row) and \
+                (cpu_col4 != cpu_col3 and cpu_row4 != cpu_row3) and \
+                (cpu_col4 != cpu_col2 and cpu_row4 != cpu_row2) and \
+                (cpu_col4 != cpu_col and cpu_row4 != cpu_row):
+                    break
     
     #Original position of the player's ships.
     grid[ship_row][ship_col] = "S"
     grid[ship_row2][ship_col2] = "S"
     grid[ship_row3][ship_col3] = "S"
+    grid[ship_row4][ship_col4] = "S"
 
     print_boards()
 
@@ -173,7 +190,7 @@ def game_logic(wide,number):
     Their aim is to sink all three of the opponent's ships.
     '''
     bullets = number
-    ships_remaining = 3
+    ships_remaining = 4
     bullets_used = 0
     co_ordinates_used = []
 
@@ -197,10 +214,8 @@ def game_logic(wide,number):
             Which also prevents the same ship from being sunk twice.
             '''
             if coordinate_validation(player_input_row,7) and coordinate_validation(player_input_col,7):
-                print("Data is valid")
                 co_ordinates_entered_alone = [(int(player_input_row),int(player_input_col))]
                 co_ordinates_entered = set(co_ordinates_entered_alone)
-                print(co_ordinates_used)
 
                 if co_ordinates_entered.issubset(co_ordinates_used):
                     print("You have already entered this co-ordinate.")
@@ -226,7 +241,8 @@ def game_logic(wide,number):
         '''
         if (player_input_row == cpu_row and player_input_col == cpu_col) \
             or (player_input_row == cpu_row2 and player_input_col == cpu_col2) \
-            or (player_input_row == cpu_row3 and player_input_col == cpu_col3):
+            or (player_input_row == cpu_row3 and player_input_col == cpu_col3) \
+            or (player_input_row == cpu_row4 and player_input_col == cpu_col4):
             cpu_grid[player_input_row][player_input_col] = 'E'
             print("Hit")
             ships_remaining -= 1
@@ -240,9 +256,10 @@ def game_logic(wide,number):
         '''
         The computer's action will do the same thing as the player's.
         The computer should not generate the same co-ordinates.
-        The computer's guess will show on the player's board.
+        The computer's guess will show on the player's board
+        as an x for an incorrect guess and an e for a correct one.
         '''
-        ships_remaining_cpu = 3
+        ships_remaining_cpu = 4
 
         while True:
             cpu_guess_row = player_ship_row(grid)
@@ -259,7 +276,8 @@ def game_logic(wide,number):
 
         if (cpu_guess_row == ship_row and cpu_guess_col == ship_col) \
             or (cpu_guess_row == ship_row2 and cpu_guess_col == ship_col2) \
-            or (cpu_guess_row == ship_row3 and cpu_guess_col == ship_col3):
+            or (cpu_guess_row == ship_row3 and cpu_guess_col == ship_col3) \
+            or (cpu_guess_row == ship_row4 and cpu_guess_col == ship_col4):
             grid[cpu_guess_row][cpu_guess_col] = 'E'
             print("The computer sank your ship")
             ships_remaining_cpu -= 1
