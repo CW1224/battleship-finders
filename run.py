@@ -188,6 +188,11 @@ def easy():
 
                     print(f"The co-ordinate you entered is {player_input_row},{player_input_col}.")
 
+                    '''
+                    This statement validates the code.
+                    Also prevents the same co-ordinate from being entered twice.
+                    Which also prevents the same ship from being sunk twice.
+                    '''
                     if coordinate_validation(player_input_row,7) and coordinate_validation(player_input_col,7):
                         print("Data is valid")
                         co_ordinates_entered_alone = [(int(player_input_row),int(player_input_col))]
@@ -201,8 +206,6 @@ def easy():
                             bullets -= 1
                             bullets_used += 1
                             break    
-                            
-                
 
                 '''
                 This allows the player's co-ordinates to sync with the system's.
@@ -216,7 +219,10 @@ def easy():
                 print(f"{cpu_row2},{cpu_col2}")
                 print(f"{cpu_row3},{cpu_col3}")
 
-                # This will notify the system that a ship has been sank.
+                '''    
+                This will notify the system that a ship has been sank.
+                This would also mark the spot where a ship isn't located.
+                '''
                 if (player_input_row == cpu_row and player_input_col == cpu_col) \
                     or (player_input_row == cpu_row2 and player_input_col == cpu_col2) \
                     or (player_input_row == cpu_row3 and player_input_col == cpu_col3):
@@ -225,16 +231,54 @@ def easy():
                     ships_remaining -= 1
                 else:
                     cpu_grid[player_input_row][player_input_col] = 'X'
-                
-                print_boards()
+                    print("You missed")
 
                 if ships_remaining == 0 or bullets == 0:
+                    break
+            
+                '''
+                The computer's action will do the same thing as the player's.
+                The computer should not generate the same co-ordinates.
+                The computer's guess will show on the player's board.
+                '''
+                ships_remaining_cpu = 3
+
+                while True:
+                    cpu_guess_row = player_ship_row(grid)
+                    cpu_guess_col = player_ship_col(grid)
+
+                    cpu_co_ordinates_used = []
+                    cpu_co_ordinates_entered_alone = [(int(cpu_guess_row),int(cpu_guess_col))]
+                    cpu_co_ordinates_entered = set(cpu_co_ordinates_entered_alone)
+
+                    if co_ordinates_entered.issubset(cpu_co_ordinates_used):
+                        continue
+                    else:
+                        co_ordinates_used.extend(co_ordinates_entered)
+                        break
+
+                if (cpu_guess_row == ship_row and cpu_guess_col == ship_col) \
+                    or (cpu_guess_row == ship_row2 and cpu_guess_col == ship_col2) \
+                    or (cpu_guess_row == ship_row3 and cpu_guess_col == ship_col3):
+                    grid[cpu_guess_row][cpu_guess_col] = 'E'
+                    print("The computer sank your ship")
+                    ships_remaining_cpu -= 1
+                else:
+                    grid[cpu_guess_row][cpu_guess_col] = 'X'
+                    print("The computer missed")
+
+                print_boards()
+
+                if ships_remaining_cpu == 0:
                     break
 
             if ships_remaining == 0:
                 print(f"Congratulations!\nYou have sank all your opponent's ships with {bullets_used} bullets.\n")
             elif bullets == 0:
-                print(f"Too bad!\n You have no more bullets left.\n You have {ships_remaining} ships remaining\n")
+                print(f"Too bad!\n You have no more bullets left.\n There are {ships_remaining} ships remaining.\n")
+            elif ships_remaining_cpu == 0:
+                print(f"The computer has sank all your ships")
+                print(f"There are {ships_remaining} ships remaining.")
 
     start_game(5)
 
