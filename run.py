@@ -82,30 +82,32 @@ def difficulty_level():
     '''
     while True:
         print("Which type of challenge are you up for?")
-        user_level_choice = input("Press 1 for easy, 2 for medium and 3 for hard.\n")
-        answer = "three"
+        user_level_choice = input("Press 1 for easy, 2 for medium, 3 for hard and 4 for impossible.\n")
+        answer = "four"
 
         if initial_validation(user_level_choice, answer):
             break
 
     user_level_choice = int(user_level_choice)
 
-    # The user would have a choice between the easy, medium and hard game.
+    # The user would have a choice between the easy, medium, hard and impossible game.
     if user_level_choice == 1:
-        game_logic(6,25)
+        game_logic(5,16)
     
     elif user_level_choice == 2:
-        game_logic(7,36)
+        game_logic(6,25)
 
     elif user_level_choice == 3:
-        game_logic(8,49)
+        game_logic(7,36)
+
+    elif user_level_choice == 4:
+        game_logic(8, 49)
 
 grid = []
 cpu_grid = []
 
 def game_logic(wide,number):
     '''
-    Function that generates the easy grid or the 6 x 6 grid.
     This block of code was taken from iKelvvv and modified.
     Reference is given in the readme.
     The original would be pasted there.
@@ -323,15 +325,15 @@ def initial_validation(value,number_of_answers):
         value = int(value)
         if number_of_answers == 'two' and value != 0 and value!= 1:
             raise ValueError(
-                f"The number you entered is {value}."
+                f"The number you entered is {value}. Please enter with 0 or 1."
             )
         elif number_of_answers == 'one' and value!= 1:
             raise ValueError(
-                f"The number you entered is {value}."
+                f"The number you entered is {value}. Please enter with 1."
             )
-        elif number_of_answers == 'three' and value!= 1 and value!= 2 and value!=3:
+        elif number_of_answers == 'four' and value!= 1 and value!= 2 and value!=3 and value!=4:
             raise ValueError(
-                f"The number you entered is {value}."
+                f"The number you entered is {value} Please enter with 1, 2, 3 or 4."
             )
 
     except ValueError as e:
