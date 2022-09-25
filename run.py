@@ -61,7 +61,7 @@ def show_instructions():
     print("Think carefully and enjoy the game!\n")
 
     while True:
-        # Determining if the answer the user imputs is valid or not.
+        # Determining if the answer the user inputs is valid or not.
         instructions_read = input("Press 1 when you have finished.\n")
         answer = 'one'
         print("")
@@ -69,10 +69,10 @@ def show_instructions():
         if initial_validation(instructions_read, answer):
             break
 
-    instructions_read = int(instructions_read)
+        instructions_read = int(instructions_read)
 
-    if instructions_read == 1:
-        difficulty_level()
+        if instructions_read == 1:
+            difficulty_level()
 
 
 def difficulty_level():
@@ -312,19 +312,21 @@ def initial_validation(value, number_of_answers):
         value = int(value)
         if number_of_answers == 'two' and value != 0 and value != 1:
             raise ValueError(
-                f"The number you entered is {value}. Please enter with 0 or 1."
+                f"The number you entered is {value}. Enter with 0 or 1."
             )
         elif number_of_answers == 'one' and value != 1:
             raise ValueError(
-                f"The number you entered is {value}. Please enter with 1."
+                f"The number you entered is {value}. Enter with 1."
             )
-        elif number_of_answers == 'four' and value != 1 and value != 2:
+        elif (
+            number_of_answers == 'four' and
+            value != 1 and
+            value != 2 and
+            value != 3 and
+            value != 4
+        ):
             raise ValueError(
-                f"You have entered {value}. Please enter with 1, 2, 3 or 4."
-            )
-        elif number_of_answers == 'four' and value != 3 and value != 4:
-            raise ValueError(
-                f"You have entered {value}. Please enter with 1, 2, 3 or 4."
+                f"You have entered {value}. Enter with 1, 2, 3 or 4."
             )
 
     except ValueError as e:
