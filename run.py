@@ -28,7 +28,7 @@ def accept_game():
         while True:
             print("Would you like to read the instructions?")
             instructions = input("Press 1 for yes, 0 for no\n")
-            answer = 'one_zero'
+            answer = 'two'
             print("")
 
             # Determining if the answer the user imputs is valid or not.
@@ -70,10 +70,10 @@ def show_instructions():
         if initial_validation(instructions_read, answer):
             break
 
-        instructions_read = int(instructions_read)
+    instructions_read = int(instructions_read)
 
-        if instructions_read == 1:
-            difficulty_level()
+    if instructions_read == 1:
+        difficulty_level()
 
 
 def difficulty_level():
@@ -86,6 +86,7 @@ def difficulty_level():
         print("Press 1 for the easy grid, 2 for medium")
         print("3 for hard and 4 for impossible.")
         user_level_choice = input("Insert 1, 2, 3 or 4.\n")
+        print("")
         answer = "four"
 
         if initial_validation(user_level_choice, answer):
@@ -95,23 +96,23 @@ def difficulty_level():
 
     # The user would have a choice between the four different grid sizes.
     if user_level_choice == 1:
-        game_logic(5, 20)
+        game_logic(5, 20, 6)
 
     elif user_level_choice == 2:
-        game_logic(6, 30)
+        game_logic(6, 30, 7)
 
     elif user_level_choice == 3:
-        game_logic(7, 40)
+        game_logic(7, 40, 8)
 
     elif user_level_choice == 4:
-        game_logic(8, 49)
+        game_logic(8, 49, 9)
 
 
 grid = []
 cpu_grid = []
 
 
-def game_logic(wide, number):
+def game_logic(wide, number, ranges):
     '''
     This block of code was taken from iKelvvv and modified.
     Reference is given in the readme.
@@ -183,6 +184,7 @@ def game_logic(wide, number):
     grid[ship_row3][ship_col3] = "S"
     grid[ship_row4][ship_col4] = "S"
 
+    print("")
     print_boards()
 
     # Code that allows the game to be played.
@@ -195,16 +197,18 @@ def game_logic(wide, number):
     while bullets != 0 and ships_remaining != 0:
         while True:
 
+            print(f"Bullets remaining: {bullets}\n")
             print("Where do you want to aim?")
 
             player_input_row = input("Enter the horizontal co-ordinate here\n")
             player_input_col = input("Enter the vertical co-ordinate here\n")
+            print("")
 
             print(f"You entered: {player_input_row},{player_input_col}.")
 
             # This statement validates the code.
-            if coordinate_validation(player_input_row, 7) and \
-               coordinate_validation(player_input_col, 7):
+            if coordinate_validation(player_input_row, ranges) and \
+               coordinate_validation(player_input_col, ranges):
                 co_ordinates = [(int(player_input_row), int(player_input_col))]
                 co_ordinates_entered = set(co_ordinates)
 
@@ -223,15 +227,13 @@ def game_logic(wide, number):
         player_input_row = int(player_input_row) - 1
         player_input_col = int(player_input_col) - 1
 
-        print(f"Co-ordinates entered: {co_ordinates_used}\n")
-
         # This will notify the system that a ship has been sank.
         if (player_input_row == cpu_row and player_input_col == cpu_col) \
            or (player_input_row == cpu_row2 and player_input_col == cpu_col2)\
            or (player_input_row == cpu_row3 and player_input_col == cpu_col3)\
            or (player_input_row == cpu_row4 and player_input_col == cpu_col4):
             cpu_grid[player_input_row][player_input_col] = 'E'
-            print("Hit")
+            print("You have sank the opponent's ship")
             ships_remaining -= 1
         else:  # This would also mark the spot where a ship isn't located.
             cpu_grid[player_input_row][player_input_col] = 'X'
@@ -248,7 +250,7 @@ def game_logic(wide, number):
             cpu_guess_col = player_ship_col(grid)
 
             cpu_co_ordinates_used = []
-            cpu_co_ordinates_alone = [(int(1), int(2))]
+            cpu_co_ordinates_alone = [(int(cpu_guess_row), int(cpu_guess_col))]
             cpu_co_ordinates_entered = set(cpu_co_ordinates_alone)
 
             # The computer should not generate the same co-ordinates.
@@ -270,6 +272,7 @@ def game_logic(wide, number):
         else:  # An x for an incorrect guess.
             grid[cpu_guess_row][cpu_guess_col] = 'X'
             print("The computer missed")
+            print("")
 
         print_boards()
 
@@ -283,23 +286,12 @@ def game_logic(wide, number):
     elif bullets == 0:
         print("Too bad!")
         print("You have no more bullets left.")
-        print(f"There are {ships_remaining} ships remaining.\n")
+        print(f"Ships left: {ships_remaining}\n")
+        print("Better luck next time!")
     elif ships_remaining_cpu == 0:
         print("The computer has sank all your ships")
-        print(f"There are {ships_remaining} ships remaining.")
-    
-    while True:
-        print("Do you want to play again?")
-        continue_game = input("Press 1 for yes and 0 for no\n")
-        answer = 'two'
-
-        print("")
-
-        # Determining if the answer the user imputs is valid or not.
-        if initial_validation(continue_game, answer):
-            break
-
-    continue_game = int(continue_game)
+        print(f"You have {bullets_used} bullets left.")
+        print("Get revenge by playing again.")
 
 
 def board_format(board):
@@ -360,6 +352,9 @@ def coordinate_validation(value, grid_length):
         if value not in range(grid_length):
             raise ValueError(
                 f"You have entered {value}.\n It is not within the range.")
+        elif value == 0:
+            raise ValueError(
+                f"You have entered {value}.\n It is not within the range.")
 
     except ValueError as e:
         print(f"Invalid data: {e} Please try again.\n")
@@ -370,8 +365,20 @@ def coordinate_validation(value, grid_length):
 
 print("Welcome to Battleship Attack!\n")
 
-while continue_game == 1:
+while True:
     accept_game()
+    while True:
+        print("Do you want to play again?")
+        continue_game = input("Press 1 for yes and 0 for no\n")
+        answer = 'two'
+
+        print("")
+
+        # Determining if the answer the user inputs is valid or not.
+        if initial_validation(continue_game, answer):
+            break
+    continue_game = int(continue_game)
+
     if continue_game != 1:
         break
 
