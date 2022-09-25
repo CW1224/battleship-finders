@@ -171,6 +171,7 @@ def easy():
             '''
             bullets = number
             ships_remaining = 3
+            bullets_used = 0
 
             while bullets != 0 and ships_remaining != 0:
                 '''
@@ -188,28 +189,34 @@ def easy():
 
                     if coordinate_validation(player_input_row,7) and coordinate_validation(player_input_col,7):
                         print("Data is valid")
+                        bullets -= 1
+                        bullets_used += 1
                         break
                 
                 player_input_row = int(player_input_row) - 1
                 player_input_col = int(player_input_col) - 1 
 
-                print(player_input_row)
-                print(player_input_col)
-                print(f"{ship_row},{ship_col}")
-                print(f"{ship_row2},{ship_col2}")
-                print(f"{ship_row3},{ship_col3}")
+                print(f"{cpu_row},{cpu_col}")
+                print(f"{cpu_row2},{cpu_col2}")
+                print(f"{cpu_row3},{cpu_col3}")
 
-                if (player_input_row == ship_row and player_input_col == ship_col) \
-                    or (player_input_row == ship_row2 and player_input_col == ship_col2) \
-                    or (player_input_row == ship_row3 and player_input_col == ship_col3):
+                #This will notify the system that a ship has been sank.
+                if (player_input_row == cpu_row and player_input_col == cpu_col) \
+                    or (player_input_row == cpu_row2 and player_input_col == cpu_col2) \
+                    or (player_input_row == cpu_row3 and player_input_col == cpu_col3):
                     print("Hit")
+                    ships_remaining -= 1
+                    
 
                 if ships_remaining == 0 or bullets == 0:
                     break
-    
-    start_game(25)
 
-            
+            if ships_remaining == 0:
+                print(f"Congratulations!\nYou have sank all your opponent's ships with {bullets_used} bullets.\n")
+            elif bullets == 0:
+                print(f"Too bad!\n You have no more bullets left.\n You have {ships_remaining} ships remaining\n")
+
+    start_game(5)
 
 
 def hard():
