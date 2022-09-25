@@ -172,6 +172,7 @@ def easy():
             bullets = number
             ships_remaining = 3
             bullets_used = 0
+            co_ordinates_used = []
 
             while bullets != 0 and ships_remaining != 0:
                 '''
@@ -191,8 +192,13 @@ def easy():
                         print("Data is valid")
                         bullets -= 1
                         bullets_used += 1
+                        co_ordinates_used.append([player_input_row],[player_input_col])
                         break
-                
+
+                '''
+                This allows the player's co-ordinates to sync with the system's.
+                The system's first grid has the co-ordinates (0,0) which is one less than the person's input at (1,1).
+                '''
                 player_input_row = int(player_input_row) - 1
                 player_input_col = int(player_input_col) - 1 
 
@@ -200,7 +206,10 @@ def easy():
                 print(f"{cpu_row2},{cpu_col2}")
                 print(f"{cpu_row3},{cpu_col3}")
 
-                #This will notify the system that a ship has been sank.
+                '''
+                This will notify the system that a ship has been sank.
+                This won't allow the same ship to be sank twice.
+                '''
                 if (player_input_row == cpu_row and player_input_col == cpu_col) \
                     or (player_input_row == cpu_row2 and player_input_col == cpu_col2) \
                     or (player_input_row == cpu_row3 and player_input_col == cpu_col3):
@@ -216,7 +225,7 @@ def easy():
             elif bullets == 0:
                 print(f"Too bad!\n You have no more bullets left.\n You have {ships_remaining} ships remaining\n")
 
-    start_game(5)
+    start_game(25)
 
 
 def hard():
