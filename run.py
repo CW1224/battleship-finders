@@ -1,6 +1,9 @@
 from random import randint
 
 
+continue_game = 1
+
+
 def accept_game():
     '''
     Function for the user to accept the challenge.
@@ -48,23 +51,21 @@ def show_instructions():
     Choosing no would bring the user to the next part of the game.
     '''
     print("The goal of this game is to sink all of the opponant's ships.")
-    print("You will have a choice between grid sizes of 6x6 or 8x8.")
+    print("You will have a choice between four different grid sizes.")
     print("Both players will have a total of four ships.")
     print("You will have a limited number of bullets.")
     print("Choose where you want to aim by typing in the co-ordinates.")
-    print("The co-ordinates should be expressed as x,y.")
-    print("An example would be 3,4 .")
+    print("You will be asked to type in the horizontal co-ordinate first.")
+    print("Then you will be asked to type in the vertical co-ordinate.")
     print("The top left of the grid is 1,1 .")
-    print("As you go across the grid, the first number(x) increases.")
-    print("As you go down the grid, the second number (y) increases.")
     print("The game ends when the bullets run out or when all ships are sank")
-    print("Think carefully and enjoy the game!\n")
+    print("Think carefully and good luck!\n")
 
     while True:
         # Determining if the answer the user inputs is valid or not.
         instructions_read = input("Press 1 when you have finished.\n")
         answer = 'one'
-        print("")
+        print(" ")
 
         if initial_validation(instructions_read, answer):
             break
@@ -286,6 +287,19 @@ def game_logic(wide, number):
     elif ships_remaining_cpu == 0:
         print("The computer has sank all your ships")
         print(f"There are {ships_remaining} ships remaining.")
+    
+    while True:
+        print("Do you want to play again?")
+        continue_game = input("Press 1 for yes and 0 for no\n")
+        answer = 'two'
+
+        print("")
+
+        # Determining if the answer the user imputs is valid or not.
+        if initial_validation(continue_game, answer):
+            break
+
+    continue_game = int(continue_game)
 
 
 def board_format(board):
@@ -356,4 +370,9 @@ def coordinate_validation(value, grid_length):
 
 print("Welcome to Battleship Attack!\n")
 
-accept_game()
+while continue_game == 1:
+    accept_game()
+    if continue_game != 1:
+        break
+
+print("In order to play again, press the run button")
