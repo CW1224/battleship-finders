@@ -134,10 +134,10 @@ After:
 
 The S would change to E if the computer guesses correctly.
 Before:
-![Before S](/assets/screenshots/grid7.png)
+![Before S](/assets/screenshots/grid5.png)
 
 After:
-
+![After S]
 
 The '-'  would change to E if the player guesses correctly.
 Before:
