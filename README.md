@@ -66,6 +66,8 @@ The following are expected of the website:
 
 The grid in which the player and computer plays is shown in the image below.
 
+![Grid with letters](/assets/screenshots/x-s-e--.png)
+
 The horizontal lines represent a co-ordinate on the grid and it would change to S, E, or X depending on the situation.
 
 ## 1.4 Brainstorm
@@ -73,6 +75,10 @@ The horizontal lines represent a co-ordinate on the grid and it would change to 
 [Return to the Table of Contents](#table-of-contents)
 
 This is the flowchart that shows how the game goes initially.
+
+![Flowchart](/assets/screenshots/Flowchart.png)
+
+The only changes that I made to the initial flowchart is the number of grid sizes and the final question. The final question in this programme actually brings the user back to the very first question, not the difficulty level.
 
 # 2. Features
 
