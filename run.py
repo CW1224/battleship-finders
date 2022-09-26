@@ -78,8 +78,8 @@ def show_instructions():
 
 def difficulty_level():
     '''
-    Function that allows the user to choose between easy and hard.
-    There are two choices altogether.
+    Function that allows the user to choose between different grid sizes.
+    There are four choices altogether.
     '''
     while True:
         print("Which type of challenge are you up for?\n")
@@ -99,10 +99,10 @@ def difficulty_level():
         game_logic(5, 20, 6)
 
     elif user_level_choice == 2:
-        game_logic(6, 30, 7)
+        game_logic(6, 25, 7)
 
     elif user_level_choice == 3:
-        game_logic(7, 40, 8)
+        game_logic(7, 36, 8)
 
     elif user_level_choice == 4:
         game_logic(8, 49, 9)
@@ -123,52 +123,52 @@ def game_logic(wide, number, ranges):
         grid.append(["-"] * wide)
         cpu_grid.append(['-'] * wide)
 
-    def player_ship_col(grid):
+    def player_ship_col():
         # Generates a random column's number of the player's ship.
-        return randint(0, len(grid) - 1)
+        return randint(0, wide - 1)
 
-    def player_ship_row(grid):
+    def player_ship_row():
         # Generates a random row's number of the player's ship.
-        return randint(0, len(grid) - 1)
+        return randint(0, wide - 1)
 
-    def cpu_ship_col(cpu_grid):
+    def cpu_ship_col():
         # Generates a random column's number of the computer's ship.
-        return randint(0, len(cpu_grid) - 1)
+        return randint(0, wide - 1)
 
-    def cpu_ship_row(cpu_grid):
+    def cpu_ship_row():
         # Generates a random row's number of the computer's ship.
-        return randint(0, len(cpu_grid) - 1)
+        return randint(0, wide - 1)
 
-    ship_col = player_ship_col(grid)
-    ship_row = player_ship_row(grid)
-    cpu_col = cpu_ship_col(cpu_grid)
-    cpu_row = cpu_ship_row(cpu_grid)
+    ship_col = player_ship_col()
+    ship_row = player_ship_row()
+    cpu_col = cpu_ship_col()
+    cpu_row = cpu_ship_row()
 
     # Loop that doesn't allow ship to be placed at same space.
     while True:
         # The second ship's position
-        ship_col2 = player_ship_col(grid)
-        ship_row2 = player_ship_row(grid)
-        cpu_col2 = cpu_ship_col(cpu_grid)
-        cpu_row2 = cpu_ship_row(cpu_grid)
+        ship_col2 = player_ship_col()
+        ship_row2 = player_ship_row()
+        cpu_col2 = cpu_ship_col()
+        cpu_row2 = cpu_ship_row()
         # The second ship's position's check
         if (ship_col2 != ship_col and ship_row2 != ship_row) and \
            (cpu_col2 != cpu_col and cpu_row2 != cpu_row):
             # The third ship's position
-            ship_col3 = player_ship_col(grid)
-            ship_row3 = player_ship_row(grid)
-            cpu_col3 = cpu_ship_col(cpu_grid)
-            cpu_row3 = cpu_ship_row(cpu_grid)
+            ship_col3 = player_ship_col()
+            ship_row3 = player_ship_row()
+            cpu_col3 = cpu_ship_col()
+            cpu_row3 = cpu_ship_row()
             # The third ship's position's check
             if (ship_col3 != ship_col2 and ship_row3 != ship_row2) and \
                (ship_col3 != ship_col and ship_row3 != ship_row) and \
                (cpu_col3 != cpu_col2 and cpu_row3 != cpu_row2) and \
                (cpu_col3 != cpu_col and cpu_row3 != cpu_row):
                 # The fourth ship's position
-                ship_col4 = player_ship_col(grid)
-                ship_row4 = player_ship_row(grid)
-                cpu_col4 = cpu_ship_col(cpu_grid)
-                cpu_row4 = cpu_ship_row(cpu_grid)
+                ship_col4 = player_ship_col()
+                ship_row4 = player_ship_row()
+                cpu_col4 = cpu_ship_col()
+                cpu_row4 = cpu_ship_row()
                 # The fourth ship's position's check
                 if (ship_col4 != ship_col3 and ship_row4 != ship_row3) and \
                    (ship_col4 != ship_col2 and ship_row4 != ship_row2) and \
@@ -246,8 +246,8 @@ def game_logic(wide, number, ranges):
         ships_remaining_cpu = 4
 
         while True:
-            cpu_guess_row = player_ship_row(grid)
-            cpu_guess_col = player_ship_col(grid)
+            cpu_guess_row = player_ship_row()
+            cpu_guess_col = player_ship_col()
 
             cpu_co_ordinates_used = []
             cpu_co_ordinates_alone = [(int(cpu_guess_row), int(cpu_guess_col))]
@@ -378,6 +378,8 @@ while True:
         if initial_validation(continue_game, answer):
             break
     continue_game = int(continue_game)
+    grid.clear()
+    cpu_grid.clear()
 
     if continue_game != 1:
         break
