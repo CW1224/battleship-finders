@@ -16,6 +16,13 @@ You can find a link to my website [here]()
 - 1.4 Brainstorm
 
 [2.Features](#2-features)
+- 2.1 Four Grid Sizes
+- 2.2 Questions answered with only 1
+- 2.3 Questions answered with 1 and 0
+- 2.4 Questions answered with 1, 2, 3 and 4
+- 2.5 Co-ordinate entry
+- 2.6 Letter change
+- 2.7 Bullet change
 
 [3.Technology](#3-technology)
 
@@ -50,24 +57,80 @@ The following are expected of the website:
 * The instructions of how to continue should be set out clearly.
 * Information on how to play should be clearly set out for first-time players.
 * For returning players, an option to skip the instructions for the game has to be available.
+* Ships should be generated at different areas in different games.
 * At the end of the game, an option should be available to the user to start the game again.
 
 ## 1.3 Visual Images
 
 [Return to the Table of Contents](#table-of-contents)
 
+The grid in which the player and computer plays is shown in the image below.
 
+The horizontal lines represent a co-ordinate on the grid and it would change to S, E, or X depending on the situation.
 
 ## 1.4 Brainstorm
 
 [Return to the Table of Contents](#table-of-contents)
 
-
+This is the flowchart that shows how the game goes initially.
 
 # 2. Features
 
 [Return to the Table of Contents](#table-of-contents)
 
+## 2.1 Four Grid Sizes
+
+There are four sizes altogether in which the player can choose from. 
+There is the 5 x 5 grid:
+
+There is the 6 x 6 grid:
+
+There is the 7 x 7 grid:
+
+There is the 8 x 8 grid:
+
+## 2.2 Questions answered with only 1
+
+This question can only be answered with 1:
+
+## 2.3 Questions answered with 1 and 0
+
+This question can only be answered with 1 or 0:
+
+## 2.4 Questions answered with 1, 2, 3 and 4
+
+This question can be answered with 1, 2, 3 or 4 but nothing else:
+
+## 2.5 Co-ordinate entry
+
+The programme would first ask for the horizontal co-ordinate:
+
+Then it would ask for the vertical co-ordinate:
+
+Then it would display the co-ordinate with both the horizontal and vertical side-by-side:
+
+## 2.6 Letter change
+
+Initially, the location of the ships on the player's board is represented with S and everything else is represented as '-':
+
+The '-' would change to X if the user or computer guesses wrong.
+Before:
+
+After:
+
+The S would change to E if the computer guesses correctly.
+Before:
+
+After:
+
+The '-'  would change to E if the player guesses correctly.
+Before:
+
+After:
+
+## 2.7 Bullet change
+
+The number of bullets would decrease with every valid aim the player makes:
 
 
 # 3. Technology
@@ -143,15 +206,16 @@ The site was deployed to Heroku using the following steps:
 
 [Return to the Table of Contents](#table-of-contents)
 
+This is the complete version of my programme.
+
 
 # 8. Improvements
 
 [Return to the Table of Contents](#table-of-contents)
 
-* 
-* 
-* 
-* 
+* Color could be added to the letterings depending on whether the answer is correct or incorrect.
+* The length of the ship should change to make the game more dependent on strategy rather than luck.
+* The programme should clear itself to allow the user to always see the grid.
 
 # 9. Acknowledgements
 
@@ -206,6 +270,5 @@ The site was deployed to Heroku using the following steps:
 
         return True
 * For the Readme file, I took the structure from my previous Readme file and used it here. Reference is given to https://github.com/dhakal79/Portfolio-project-MS1 which is the readme file I took into consideration when I was doing my first one.
-* 
 * The ideas and code I implemented into this project were taught to me by Code Institute.
 * My mentor Marcel Mulders supported me throughout the whole project. I couldn't have done it without his help.
