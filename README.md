@@ -1,4 +1,4 @@
-# General Knowledge Quiz
+# Annoying Battleships
 
 Welcome to the readme file of my project.
 
@@ -6,7 +6,7 @@ Welcome to the readme file of my project.
 
 This programme is designed to test the user's luck. Annoying Battleship is programmed to test the user's patience as well as their luck for the day.
 
-You can find a link to my website [here]()
+You can find a link to my website [here](https://annoying-battleships.herokuapp.com/)
 
 # Table of Contents
 [1.User Experience(UX)](#1-user-experience)
@@ -115,8 +115,7 @@ This question can be answered with 1, 2, 3 or 4 but nothing else:
 The programme would first ask for the horizontal co-ordinate:
 ![Horizontal Co-ordinate](/assets/screenshots/grid-7-comparator.png)
 
-Then it would ask for the vertical co-ordinate:
-![Vertical Co-ordinate](/assets/screenshots/bullets-remaining-vertical-question.png)
+Then it would ask for the vertical co-ordinate.
 
 Then it would display the co-ordinate with both the horizontal and vertical side-by-side:
 ![Co-ordinate](/assets/screenshots/player-hit-cpu-miss.png)
@@ -134,10 +133,10 @@ After:
 
 The S would change to E if the computer guesses correctly.
 Before:
-![Before S](/assets/screenshots/grid5.png)
+![Before S](/assets/screenshots/cpu-sink-before.png)
 
 After:
-![After S]
+![After S](/assets/screenshots/cpu-sink.png)
 
 The '-'  would change to E if the player guesses correctly.
 Before:
@@ -259,6 +258,7 @@ The site was deployed to Heroku using the following steps:
 - If you want heroku to automatically build your code after pushing it to github each time, press enable automatic deploy.
 - Your pogramme has now been deployed.
 - Press view to view your programme.
+- The link to my programme can be found [here](https://annoying-battleships.herokuapp.com/)
 
 # 7. Project Completion
 
@@ -266,6 +266,15 @@ The site was deployed to Heroku using the following steps:
 
 This is the complete version of my programme.
 
+![Picture 1](/assets/screenshots/1.png)
+![Picture 2](/assets/screenshots/2.png)
+Alternate Picture 2
+![Picture 2a](/assets/screenshots/2a.png)
+![Picture 3](/assets/screenshots/3.png)
+![Picture 4](/assets/screenshots/4.png)
+![Picture 5](/assets/screenshots/5.png)
+![Picture 6](/assets/screenshots/6.png)
+![Picture 7](/assets/screenshots/7.png)
 
 # 8. Improvements
 
