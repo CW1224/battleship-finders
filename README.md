@@ -4,7 +4,9 @@ Welcome to the readme file of my project.
 
 ## Introduction
 
-You can find a link to my website [here]
+This programme is designed to test the user's luck. Annoying Battleship is programmed to test the user's patience as well as their luck for the day.
+
+You can find a link to my website [here]()
 
 # Table of Contents
 [1.User Experience(UX)](#1-user-experience)
@@ -35,9 +37,22 @@ You can find a link to my website [here]
 
 [Return to the Table of Contents](#table-of-contents)
 
-
+My goal in creating this programme is to allow users to check their luck for the day. Will they be able to sink all their opponents' ship using bullets that wouldn't cover the whole grid? Will they lose to the computer? Or will they be so frustratingly close that the idea would bother them for the whole day? Try the game and find out.
 
 ## 1.2 User Expectations
+
+[Return to the Table of Contents](#table-of-contents)
+
+The following are expected of the website:
+
+* Should be easily accessible.
+* The language should be in simple English.
+* The instructions of how to continue should be set out clearly.
+* Information on how to play should be clearly set out for first-time players.
+* For returning players, an option to skip the instructions for the game has to be available.
+* At the end of the game, an option should be available to the user to start the game again.
+
+## 1.3 Visual Images
 
 [Return to the Table of Contents](#table-of-contents)
 
@@ -46,6 +61,7 @@ You can find a link to my website [here]
 ## 1.4 Brainstorm
 
 [Return to the Table of Contents](#table-of-contents)
+
 
 
 # 2. Features
@@ -125,17 +141,12 @@ The site was deployed to Heroku using the following steps:
 
 # 7. Project Completion
 
-## Desktop Version of my Project
-
-This is the desktop version of the website.
-
-
-## Mobile Version of my Project
-
-This is the mobile version of the website
+[Return to the Table of Contents](#table-of-contents)
 
 
 # 8. Improvements
+
+[Return to the Table of Contents](#table-of-contents)
 
 * 
 * 
@@ -146,8 +157,54 @@ This is the mobile version of the website
 
 [Return to the Table of Contents](#table-of-contents)
 
-* 
-* 
+* Credits is given to [iKelvv](https://github.com/iKelvvv/MS3) for given me some code to be used in the programme. This is the code that was implemented into my programme in which I modified.
+    - for x in range(7):
+    """
+    Generates the size of the playing board
+    """
+    board.append(["-"] * 7)
+    cpu_board.append(["_"] * 7) 
+    - def location_col(board):
+        """
+        Generate a random column for the computer's ship
+        """
+        return randint(0, len(board) - 1)
+
+
+    - def location_row(board):
+        """
+        Generate a random row for the computer's ship
+        """
+        return randint(0, len(board) - 1)
+
+
+    - def cpu_location_col(cpu_board):
+        """
+        Generate a random row for the player's ship
+        """
+        return randint(0, len(cpu_board) - 1)
+
+
+    - def cpu_location_row(cpu_board):
+        """
+        Generate a random column for the player's ship
+        """
+        return randint(0, len(cpu_board) - 1)
+* Credits is given to the LoveSandwich walkthrough tutorial for the validation section of my programme.
+    - def validate_data(values):
+
+        try: 
+            [int(value) for value in values]
+            if len(values) != 6:
+                raise ValueError(
+                    f"Exactly 6 values required, you provided {len(values)}"
+                )
+            
+        except ValueError as e:
+            print(f"Invalid Data: {e}, please try again\n")
+            return False
+
+        return True
 * For the Readme file, I took the structure from my previous Readme file and used it here. Reference is given to https://github.com/dhakal79/Portfolio-project-MS1 which is the readme file I took into consideration when I was doing my first one.
 * 
 * The ideas and code I implemented into this project were taught to me by Code Institute.
