@@ -88,12 +88,16 @@ The only changes that I made to the initial flowchart is the number of grid size
 
 There are four sizes altogether in which the player can choose from. 
 There is the 5 x 5 grid:
+![5 x 5 Grid](/assets/screenshots/grid5.png)
 
 There is the 6 x 6 grid:
+![6 x 6 Grid](/assets/screenshots/grid6.png)
 
 There is the 7 x 7 grid:
+![7 x 7 Grid](/assets/screenshots/grid7.png)
 
 There is the 8 x 8 grid:
+![8 x 8 Grid](/assets/screenshots/grid8.png)
 
 ## 2.2 Questions answered with only 1
 
@@ -138,6 +142,9 @@ After:
 
 The number of bullets would decrease with every valid aim the player makes:
 
+## 2.8 Final Message
+
+Three different final messages are shown depending on the circumstances.
 
 # 3. Technology
 
@@ -242,53 +249,60 @@ This is the complete version of my programme.
 [Return to the Table of Contents](#table-of-contents)
 
 * Credits is given to [iKelvv](https://github.com/iKelvvv/MS3) for given me some code to be used in the programme. This is the code that was implemented into my programme in which I modified.
-    - for x in range(7):
+```
+for x in range(7):
     """
     Generates the size of the playing board
     """
     board.append(["-"] * 7)
-    cpu_board.append(["_"] * 7) 
-    - def location_col(board):
-        """
-        Generate a random column for the computer's ship
-        """
-        return randint(0, len(board) - 1)
-
-
-    - def location_row(board):
-        """
-        Generate a random row for the computer's ship
-        """
-        return randint(0, len(board) - 1)
-
-
-    - def cpu_location_col(cpu_board):
-        """
-        Generate a random row for the player's ship
-        """
-        return randint(0, len(cpu_board) - 1)
-
-
-    - def cpu_location_row(cpu_board):
-        """
-        Generate a random column for the player's ship
-        """
-        return randint(0, len(cpu_board) - 1)
+    cpu_board.append(["_"] * 7)
+``` 
+```
+def location_col(board):
+    """
+    Generate a random column for the computer's ship
+    """
+    return randint(0, len(board) - 1)
+```
+```
+def location_row(board):
+    """
+    Generate a random row for the computer's ship
+    """
+    return randint(0, len(board) - 1)
+```
+```
+def cpu_location_col(cpu_board):
+    """
+    Generate a random row for the player's ship
+    """
+    return randint(0, len(cpu_board) - 1)
+```
+```
+def cpu_location_row(cpu_board):
+    """
+    Generate a random column for the player's ship
+    """
+    return randint(0, len(cpu_board) - 1)
+```
 * Credits is given to the LoveSandwich walkthrough tutorial for the validation section of my programme.
-    - def validate_data(values):
+```
+def validate_data(values):
 
-        try: 
-            [int(value) for value in values]
-            if len(values) != 6:
-                raise ValueError(
-                    f"Exactly 6 values required, you provided {len(values)}"
-                )
+    try: 
+        [int(value) for value in values]
+        if len(values) != 6:
+            raise ValueError(
+                f"Exactly 6 values required, you provided {len(values)}"
+            )
             
-        except ValueError as e:
-            print(f"Invalid Data: {e}, please try again\n")
-            return False
+    except ValueError as e:
+        print(f"Invalid Data: {e}, please try again\n")
+        return False
 
-        return True
+    return True
+```
 * For the Readme file, I took the structure from my previous Readme file and used it here. Reference is given to https://github.com/dhakal79/Portfolio-project-MS1 which is the readme file I took into consideration when I was doing my first one.
+* Random was imported from an external library, in which I used the feature randint. This allowed me to generate random integers for my programme.
 * The ideas and code I implemented into this project were taught to me by Code Institute.
 * My mentor Marcel Mulders supported me throughout the whole project. I couldn't have done it without his help.
