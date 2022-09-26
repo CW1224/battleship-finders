@@ -205,6 +205,7 @@ def game_logic(wide, number, ranges):
             print("")
 
             print(f"You entered: {player_input_row},{player_input_col}.")
+            print("")
 
             # This statement validates the code.
             if coordinate_validation(player_input_row, ranges) and \
@@ -234,6 +235,7 @@ def game_logic(wide, number, ranges):
            or (player_input_row == cpu_row4 and player_input_col == cpu_col4):
             cpu_grid[player_input_row][player_input_col] = 'E'
             print("You have sank the opponent's ship")
+            print("")
             ships_remaining -= 1
         else:  # This would also mark the spot where a ship isn't located.
             cpu_grid[player_input_row][player_input_col] = 'X'
@@ -268,6 +270,7 @@ def game_logic(wide, number, ranges):
             # An e for a correct guess.
             grid[cpu_guess_row][cpu_guess_col] = 'E'
             print("The computer sank your ship")
+            print("")
             ships_remaining_cpu -= 1
         else:  # An x for an incorrect guess.
             grid[cpu_guess_row][cpu_guess_col] = 'X'
