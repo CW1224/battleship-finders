@@ -149,7 +149,9 @@ The number of bullets would decrease with every valid aim the player makes:
 
 * [LucidChart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign=_chart_en_tier1_mixed_search_brand_exact_&km_CPC_CampaignId=1490375427&km_CPC_AdGroupID=55688909257&km_CPC_Keyword=lucid%20chart&km_CPC_MatchType=e&km_CPC_ExtensionID=&km_CPC_Network=g&km_CPC_AdPosition=&km_CPC_Creative=442433236001&km_CPC_TargetID=kwd-55720648523&km_CPC_Country=1007850&km_CPC_Device=c&km_CPC_placement=&km_CPC_target=&gclid=CjwKCAjwm8WZBhBUEiwA178UnIKD1nNXqMld8VwU2N7Uh-eMW5N9fjfiwSQNyh_CJa7_GYS7DTp-uhoCWDoQAvD_BwE) was used to create my flowchart.
 
-*[Heroku](https://id.heroku.com/login) was used to deploy my project.
+* [Heroku](https://id.heroku.com/login) was used to deploy my project.
+
+* [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) was used to create the programme.
 
 # 4. Testing
 
@@ -161,7 +163,19 @@ The contents of the testing section can be find [here](testing.md).
 
 [Return to the Table of Contents](#table-of-contents)
 
+![Initial Bug](/assets/screenshots/Initial-bug-1.png)
+![Initial Bug 2](/assets/screenshots/Initial-bug-2.png)
+![Initial Bug 3](/assets/screenshots/Initial-bug-3.png)
 
+These are the initial bugs that popped up when I passed my code through the validator. I understood that the red ones meant that the code was a major problem and the orange ones are less severe.
+
+I got rid of the red ones by adjusting my code. I added a white space after commas and operators. I changed the length of my code to accommodate the preferences of python. This was done by either placing my code on separate lines or by shortening the name of my variables and I indented my code so that it does not start at the same place as the next logical operation.
+
+![Second Bug](/assets/screenshots/Bug-solving.png)
+
+This is what the validator showed me after a modified my code for the first time. In order to get rid of the orange set of problems, I deleted the white spaces that were located on blank lines. Another problem were the trailing white spaces behind my code. I got rid of them as well. I also added a new line after my final line to satisfy the final error. This ahowed up after the next validation.
+
+![Resolved Bugs](/assets/screenshots/Bug-finished.png)
 
 # 6. Deployment
 
