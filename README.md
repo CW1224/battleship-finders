@@ -17,12 +17,11 @@ You can find a link to my website [here]()
 
 [2.Features](#2-features)
 - 2.1 Four Grid Sizes
-- 2.2 Questions answered with only 1
-- 2.3 Questions answered with 1 and 0
-- 2.4 Questions answered with 1, 2, 3 and 4
-- 2.5 Co-ordinate entry
-- 2.6 Letter change
-- 2.7 Bullet change
+- 2.2 Questions answered with numbers only
+- 2.3 Co-ordinate entry
+- 2.4 Letter change
+- 2.5 Bullet change
+- 2.6 Final Message
 
 [3.Technology](#3-technology)
 
@@ -99,52 +98,84 @@ There is the 7 x 7 grid:
 There is the 8 x 8 grid:
 ![8 x 8 Grid](/assets/screenshots/grid8.png)
 
-## 2.2 Questions answered with only 1
+## 2.2 Questions answered with numbers only
 
 This question can only be answered with 1:
-
-## 2.3 Questions answered with 1 and 0
+![Start Game](/assets/screenshots/Correct-answer-firstq.png)
 
 This question can only be answered with 1 or 0:
-
-## 2.4 Questions answered with 1, 2, 3 and 4
+![Instructions](/assets/screenshots/correct-answer-second.png)
+![Instructions None](/assets/screenshots/correct-answer-second-0.png)
 
 This question can be answered with 1, 2, 3 or 4 but nothing else:
+![Difficulty level](/assets/screenshots/correct-answer-second-0.png)
 
-## 2.5 Co-ordinate entry
+## 2.3 Co-ordinate entry
 
 The programme would first ask for the horizontal co-ordinate:
+![Horizontal Co-ordinate](/assets/screenshots/grid-7-comparator.png)
 
 Then it would ask for the vertical co-ordinate:
+![Vertical Co-ordinate](/assets/screenshots/bullets-remaining-vertical-question.png)
 
 Then it would display the co-ordinate with both the horizontal and vertical side-by-side:
+![Co-ordinate](/assets/screenshots/player-hit-cpu-miss.png)
 
-## 2.6 Letter change
+## 2.4 Letter change
 
 Initially, the location of the ships on the player's board is represented with S and everything else is represented as '-':
 
 The '-' would change to X if the user or computer guesses wrong.
 Before:
+![Before -](/assets/screenshots/grid5.png)
 
 After:
+![After -](/assets/screenshots/x-s-e--.png)
 
 The S would change to E if the computer guesses correctly.
 Before:
+![Before S](/assets/screenshots/grid7.png)
 
 After:
+
 
 The '-'  would change to E if the player guesses correctly.
 Before:
+![Before E](/assets/screenshots/grid5.png)
 
 After:
+![After E](/assets/screenshots/x-s-e--.png)
 
-## 2.7 Bullet change
+## 2.5 Bullet change
 
 The number of bullets would decrease with every valid aim the player makes:
+![Bullet](/assets/screenshots/grid5.png)
+![Bullet Decrease](/assets/screenshots/bullets-remaining-vertical-question.png)
 
-## 2.8 Final Message
+## 2.6 Final Message
 
 Three different final messages are shown depending on the circumstances.
+This is the one where the player has sank all the opponent's ships:
+```
+Congratulations!
+You have sank all your opponent's ships
+with 15 bullets.
+```
+
+This is the one where the bullet runs out:
+```
+Too bad!
+You have no more bullets left.
+Ships left: 1
+Better luck next time!
+```
+
+This is the one in which the computer wins (which is very rarely):
+```
+The computer has sank all your ships
+You have 12 bullets left.
+Get revenge by playing again.
+```
 
 # 3. Technology
 
